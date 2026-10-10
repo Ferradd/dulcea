@@ -1,0 +1,31 @@
+src,out_base,occupancy_pct,widths,formats,fallback_used,notes
+RAWPHOTOS/a/Remove_photo_background_20261010014030.jpg,hero-card,70.6,504+269,avif+webp+jpg,no,"zone x57-96%,y4-94%; pad #EFE3D9"
+RAWPHOTOS/a/Remove_photo_from_layers_20261010014030.jpg,corte-band,100.0,1376+688,avif+webp+jpg,no,zone y35-55%; pad #EFE3D9
+RAWPHOTOS/b/Isolating_photos_on_white_backgr__20261010014458.jpg,card-1-nocilla-barritas,86.4,305+275,avif+webp+jpg,no,"zone-fix rect=[275, 390, 555, 665] (map x8-48%,y18-80%); pad #EFE3D9"
+RAWPHOTOS/b/Isolating_photos_on_white_backgr__20261010014458.jpg,card-2-filipinos,86.4,305+275,avif+webp+jpg,no,"zone-fix rect=[825, 390, 1105, 665] (map x52-92%,y18-80%); pad #EFE3D9"
+RAWPHOTOS/a/Remove_background_from_photos_20261010014030.jpg,queso-diptych,75.1,715+400,avif+webp+jpg,no,"zone x42-100%,y15-95%; pad #EFE3D9"
+RAWPHOTOS/b/Remove_background_and_make_white_20261010014458.jpg,tu-porcion,93.9,730+365,avif+webp+jpg,no,"zone-fix rect=[440, 77, 1335, 714] (map x5-58%,y10-92%); pad #EFE3D9"
+RAWPHOTOS/a/Isolate_photos_on_white_background_20261010014030.jpg,nocilla-pair-main,77.6,426+290,avif+webp+jpg,no,"zone-fix rect=[646, 120, 1066, 700] (map x30-72%,y8-92%); pad #EFE3D9"
+photobank/obleas-nocilla-top.jpg,nocilla-pair-second,100.0,372,avif+webp+jpg,yes,photobank fallback: baked-tilt+inner<slot-res; pad #EFE3D9
+RAWPHOTOS/b/remove_text_20261010014458.jpg,filipinos-pair-entera,95.9,464+320,avif+webp+jpg,no,"zone-fix rect=[826, 130, 1248, 690] (map x28-69%,y10-85%); pad #EFE3D9"
+RAWPHOTOS/a/Removing_photo_background_20261010014030.jpg,filipinos-pair-porcion,92.3,565+283,avif+webp+jpg,no,"zone-fix rect=[124, 100, 673, 737] (map x11-52%,y13-80%); pad #EFE3D9"
+RAWPHOTOS/a/Isolate_cake_on_white_background_20261010014030.jpg,barritas-figura,89.4,569+323,avif+webp+jpg,no,"zone-fix rect=[690, 140, 1240, 550] (map x48-95%,y15-88%); pad #EFE3D9"
+RAWPHOTOS/a/Remove_background_from_photos_20261010014030_2.jpg,barritas-satelite,71.2,493+283,avif+webp+jpg,no,"zone-fix rect=[110, 115, 674, 676] (map x8-49%,y18-83%); pad #EFE3D9"
+photobank/queso-entera.jpg,queso-shelf-entera,100.0,540+270,avif+webp+jpg,yes,photobank fallback: embed<slot-res; pad #EFE3D9
+photobank/queso-porcion.jpg,queso-shelf-porcion,100.0,540+270,avif+webp+jpg,yes,photobank fallback: embed<slot-res; pad #EFE3D9
+RAWPHOTOS/b/Remove_non-photo_elements_20261010014458.jpg,pastelera-foto-margen,66.1,224,avif+webp+jpg,no,"zone-fix rect=[1142, 338, 1366, 584] (map x62-96%,y55-93%); pad #EFE3D9"
+RAWPHOTOS/a/Isolate_photos_and_whiten_backgr__20261010014030.jpg,fotograma-1,83.3,455,avif+webp+jpg,no,"zone-fix rect=[10, 270, 468, 610] (map x1-33%,y15-82%); pad #EFE3D9"
+RAWPHOTOS/a/Isolate_photos_and_whiten_backgr__20261010014030.jpg,fotograma-2,78.4,455,avif+webp+jpg,no,"zone-fix rect=[465, 270, 922, 610] (map x34-66%,y15-82%); pad #EFE3D9"
+RAWPHOTOS/a/Isolate_photos_and_whiten_backgr__20261010014030.jpg,fotograma-3,67.3,434,avif+webp+jpg,no,"zone-fix rect=[920, 270, 1369, 610] (map x67-99%,y15-82%); pad #EFE3D9"
+RAWPHOTOS/b/Remove_background_and_make_white_20261010014458.jpg,mini-carta-foto,93.9,730+365,avif+webp+jpg,no,"zone-fix rect=[440, 77, 1335, 714] (map x5-58%,y10-92%); pad #EFE3D9"
+photobank/reel-frame-5.jpg,entrada-anchor,100.0,540,avif+webp+jpg,yes,photobank fallback: baked-caption+lowres; pad #EFE3D9
+RAWPHOTOS/a/Edit_photo_background_white_20261010014030.jpg,paso-2,71.8,466,avif+webp+jpg,no,"zone-fix rect=[784, 100, 1307, 730] (map x57-95%,y13-88%); pad #EFE3D9"
+RAWPHOTOS/a/Remove_background_and_make_white_20261010014030.jpg,paso-3,61.3,542,avif+webp+jpg,no,"zone-fix rect=[69, 38, 757, 730] (map x5-55%,y5-95%); pad #EFE3D9"
+RAWPHOTOS/b/Removing_background_from_photos_20261010014458.jpg,redactor-texture,87.7,503,avif+webp+jpg,no,"zone-fix rect=[468, 154, 991, 653] (map x5-60%,y5-95%); pad #EFE3D9"
+RAWPHOTOS/a/Remove_background_from_photos_20261010014030_2.jpg,rail-anchor,71.2,493,avif+webp+jpg,no,"zone-fix rect=[702, 115, 1266, 676] (map x51-92%,y18-83%); pad #EFE3D9"
+RAWPHOTOS/b/remove_text_20261010014458.jpg,intro-sticker,95.9,464+320,avif+webp+jpg,no,"zone-fix rect=[826, 130, 1248, 690] (map x28-69%,y10-85%); pad #EFE3D9"
+photobank/reel-frame-4.jpg,acordeon-aside,100.0,540,avif+webp+jpg,yes,photobank fallback: embed<slot-res; pad #EFE3D9
+photobank/reel-frame-2.jpg,reel-poster,100.0,720,avif+webp+jpg,yes,poster=script bookmark frame; already 720x960
+photobank/queso-entera.jpg,queso-entera-warm,75.2,640+320,avif+webp+jpg,yes,"warm grade (R*1.06,B*0.82,sat108): замена холодного shelf-entera; keep_zone, объект ~68% кадра; pad #EFE3D9"
+RAWPHOTOS/b/remove_text_20261010014458.jpg,filipinos-alt,93.4,430+215,avif+webp+jpg,no,"porción-зона внутри тёмной рамки (другой ракурс: ломтик на салфетке, дерево); keep_zone; pad #EFE3D9"
+RAWPHOTOS/a/Remove_photo_from_layers_20261010014030.jpg,capas-macro,100.0,800+400,avif+webp+jpg,no,макро страт: зона y59-94% (corte-band = y35-55%); без пада

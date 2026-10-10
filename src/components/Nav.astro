@@ -1,0 +1,220 @@
+---
+// TEAM_027: G.8 canon header — text wordmark «dulcea» (Fraunces 560,
+// lowercase) + descriptor, canonical nav (G.10), capsule «Pedir por DM».
+// Sticky hairline bar ≤1200px; burger <1024px opens a cream panel.
+import site from '../data/sections.json';
+
+interface Props {
+	current?: string;
+}
+
+const { current = Astro.url.pathname } = Astro.props;
+const { brand, header } = site.global;
+
+const isCurrent = (href: string) =>
+	href === '/' ? current === '/' : current.startsWith(href);
+---
+
+<header class="nav-wrap">
+	<div class="nav-inner mx-auto flex max-w-6xl items-center justify-between gap-6 px-5">
+		<a href="/" class="nav-brand" aria-label="dulcea — inicio">
+			<svg class="brand-cake" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 24Q24 16 40 24V36Q24 43 8 36ZM8 29Q24 36 40 29M8 34Q24 41 40 34M4 40H44M24 9V20M21 7Q18 2 24 1Q30 3 27 7Q24 10 21 7Z"/><path d="M8 24Q9 31 13 26Q16 32 20 27Q24 33 28 27Q32 32 35 26Q39 31 40 24"/></svg>
+			<span class="nav-brand-type"><span class="wordmark nav-wordmark">{brand.wordmark}</span>
+			<span class="nav-descriptor">{brand.descriptor}</span></span>
+		</a>
+
+		<nav class="nav-links" aria-label="Principal">
+			{/* TEAM_030: G.8 — активный пункт «не ссылка»: span + aria-current
+			    вместо самоссылки (та же пометка и в мобильном меню ниже). */}
+			{header.nav.map((l) => (
+				isCurrent(l.href)
+					? <span class="nav-link" aria-current="page">{l.label}</span>
+					: <a href={l.href} class="nav-link">{l.label}</a>
+			))}
+		</nav>
+
+		<div class="flex items-center gap-3">
+			<a href={header.cta.href} class="btn nav-cta">{header.cta.label}</a>
+			<button
+				type="button"
+				class="nav-burger"
+				aria-expanded="false"
+				aria-controls="nav-menu"
+				data-menu-btn
+			>
+				<span class="sr-only">{header.menu_aria}</span>
+				<i></i><i></i><i></i>
+			</button>
+		</div>
+	</div>
+
+	{/* TEAM_045 Q2-05: backdrop на весь вьюпорт под шапкой — гасит живую
+	    страницу под меню, ловит клики/elementFromPoint, закрывает по тапу. */}
+	<div class="nav-backdrop" hidden data-menu-backdrop></div>
+	<nav id="nav-menu" class="nav-menu" aria-label="Principal móvil" hidden>
+		{header.nav.map((l) => (
+			isCurrent(l.href)
+				? <span class="nav-menu-link" aria-current="page">{l.label}</span>
+				: <a href={l.href} class="nav-menu-link">{l.label}</a>
+		))}
+		<a href={header.cta.href} class="btn nav-menu-cta">{header.cta.label}</a>
+	</nav>
+</header>
+
+<style>
+	/* G.8: thin cream bar ~64–72px, hairline under it on scroll. */
+	.nav-wrap {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		background: color-mix(in srgb, var(--bg) 90%, transparent);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+	}
+	.nav-inner { height: 4.25rem; }
+
+	.nav-brand {
+		display: flex;
+		align-items: baseline;
+		gap: 0.65rem;
+		text-decoration: none;
+		color: var(--color-ink);
+	}
+	.nav-wordmark { font-size: 1.55rem; }
+	.nav-descriptor {
+		font-size: 0.72rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-muted-ink);
+		white-space: nowrap;
+	}
+	@media (max-width: 560px) {
+		.nav-descriptor { display: none; }
+	}
+
+	.nav-links { display: flex; align-items: center; gap: 1.5rem; }
+	.nav-link {
+		/* TEAM_045 Q2-01: hit-area 44px — текст центрирован в боксе,
+		   underline остаётся под текстом (bottom от середины бокса). */
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.78rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-ink);
+		position: relative;
+		white-space: nowrap;
+	}
+	.nav-link::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: calc(50% - 0.85em);
+		height: 1px;
+		background: var(--color-caramel-ink);
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s var(--ease-reveal);
+	}
+	.nav-link:hover::after,
+	.nav-link[aria-current="page"]::after { transform: scaleX(1); }
+	/* TEAM_039: hover — текст тоже уходит в caramel-ink, не только underline */
+	.nav-link:hover,
+	.nav-link[aria-current="page"] { color: var(--color-caramel-ink); }
+
+	.nav-cta { padding: 0.6em 1.3em; }
+
+	.nav-burger {
+		display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 4px;
+		/* TEAM_045 Q2-01: 40→44px hit-area */
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 999px;
+		border: 1px solid var(--color-muted);
+	}
+	.nav-burger i { display: block; width: 18px; height: 1.5px; background: var(--color-ink); }
+	.nav-burger[aria-expanded="true"] i:nth-of-type(1) { transform: translateY(5.5px) rotate(45deg); }
+	.nav-burger[aria-expanded="true"] i:nth-of-type(2) { opacity: 0; }
+	.nav-burger[aria-expanded="true"] i:nth-of-type(3) { transform: translateY(-5.5px) rotate(-45deg); }
+
+	/* TEAM_045 Q2-05: затемнённый лист на весь вьюпорт под шапкой.
+	   absolute (не fixed): backdrop-filter на .nav-wrap делает его
+	   containing block — fixed бы обрезался до высоты шапки. */
+	.nav-backdrop {
+		position: absolute;
+		inset-inline: 0;
+		top: 100%;
+		height: calc(100dvh - 100%);
+		background: rgb(36 27 22 / 0.45);
+		backdrop-filter: blur(3px);
+	}
+	.nav-menu {
+		position: absolute;
+		inset-inline: 0;
+		top: 100%;
+		background: var(--bg);
+		border-bottom: 1px solid var(--color-muted);
+		display: grid;
+		padding: 0.75rem 1.25rem 1.5rem;
+	}
+	/* TEAM_045 Q2-05: страница под открытым меню не скроллится. */
+	:global(body.nav-lock) { overflow: hidden; }
+	.nav-menu-link {
+		padding: 0.85rem 0.25rem;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		font-size: 1rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 35%, transparent);
+	}
+	.nav-menu-link[aria-current="page"] { color: var(--color-caramel-ink); }
+	.nav-menu-cta { margin-top: 1rem; justify-self: start; }
+
+	/* TEAM_027: scoped rules beat Tailwind lg:hidden — gate by media query
+	   instead (TOOLING). Burger <1024px, inline nav ≥1024px. */
+	@media (max-width: 1023.98px) {
+		.nav-links { display: none; }
+		.nav-burger { display: inline-flex; }
+	}
+	@media (min-width: 1024px) {
+		.nav-menu, .nav-backdrop { display: none; }
+	}
+</style>
+
+<script>
+	const btn = document.querySelector('[data-menu-btn]');
+	const menu = document.getElementById('nav-menu');
+	const backdrop = document.querySelector('[data-menu-backdrop]') as HTMLElement | null;
+	if (btn && menu) {
+		const setOpen = (open: boolean) => {
+			btn.setAttribute('aria-expanded', String(open));
+			menu.hidden = !open;
+			if (backdrop) backdrop.hidden = !open;
+			// TEAM_045 Q2-05: scroll-lock body, пока открыто меню
+			document.body.classList.toggle('nav-lock', open);
+		};
+		btn.addEventListener('click', () =>
+			setOpen(btn.getAttribute('aria-expanded') !== 'true')
+		);
+		backdrop?.addEventListener('click', () => setOpen(false));
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+				setOpen(false);
+				btn.focus();
+			}
+		});
+		document.addEventListener('click', (e) => {
+			if (!(e.target as HTMLElement).closest('header'))
+				setOpen(false);
+		});
+	}
+</script>

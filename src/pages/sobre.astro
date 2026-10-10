@@ -1,0 +1,475 @@
+---
+// TEAM_030: «La pastelera» — SITE_SCRIPT sobre S01–S05. Читательская
+// страница: обычный reveal-каскад, ничего sticky. Фото — карточки «на
+// столе»/кадры киноплёнки из cut/ (CutPic: avif→webp→jpg, w/h фикс).
+// Caveat-бюджет 2/2: «mi mesa de trabajo» (S01) + «— la pastelera» (S04).
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CutPic from '../components/CutPic.astro';
+import site from '../data/sections.json';
+
+const p = site.sobre;
+const [outroPre, outroPost] = p.s03.outro.split('la página de tartas');
+// TEAM_044 (Q1-16/Q1-13): fotograma-3 → queso-entera-warm — тёплый
+// градированный кадр той же tarta de queso; «плёнка» едина по тону.
+const filmSlots = ['fotograma-1', 'fotograma-2', 'queso-shelf-porcion'];
+---
+
+<Base title={p.meta.title} description={p.meta.description}>
+	<Nav slot="header" />
+
+	{/* S01 — «Hola»: письмо. Текст 7/12 слева, фото-карточка «на полях»
+	     справа (натив 224px — слот маргинальный по ASSET_MAP, G.6 ≤ native).
+	     Мобайл: eyebrow → H1 → фото → абзацы. */}
+	{/* TEAM_044 (Q2-02): @390 межсекционные полосы 64–96px — pb/pt
+	     ужаты на мобайле, десктоп-ритм сохранён через md:. */}
+	<section data-section="S01" class="mx-auto max-w-6xl px-5 pt-12 pb-10 md:pt-24 md:pb-16">
+		<div class="ap">
+			<p class="eyebrow ap-eb" data-reveal>{p.s01.eyebrow}</p>
+			<h1 class="font-display ap-h1" data-reveal>{p.s01.h1}</h1>
+			<figure class="ap-fig" data-reveal>
+				<div class="frame-card">
+					<CutPic
+						name="pastelera-foto-margen"
+						alt={p.s01.img_alt}
+						sizes="224px"
+						loading="eager"
+						fetchpriority="high"
+					/>
+				</div>
+				<figcaption class="hand-note ap-cap">{p.s01.photo_caption}</figcaption>
+			</figure>
+			<div class="ap-paras">
+				{p.s01.paragraphs.map((t) => <p data-reveal>{t}</p>)}
+			</div>
+		</div>
+	</section>
+
+	{/* S02 — «Mi cocina, tal cual»: tira de contacto, 3 фотограммы в
+	     тёмных рамках-перфорации. Мобайл — scroll-snap свайп (~16px peek). */}
+	<section data-section="S02" class="mx-auto max-w-6xl px-5 py-10 md:py-20" aria-labelledby="s02-h">
+		<h2 id="s02-h" class="font-display text-h2" data-reveal>{p.s02.headline}</h2>
+		<p class="s02-line" data-reveal>{p.s02.intro}</p>
+		<div class="film" data-reveal>
+			{p.s02.frames.map((f, i) => (
+				<figure class="film-frame">
+					<div class="film-cell">
+						<div class="film-media">
+							<CutPic
+								name={filmSlots[i]}
+								alt={f.img_alt}
+								sizes="(min-width: 64rem) 30vw, 78vw"
+							/>
+						</div>
+						<span class="film-num">{f.mark}</span>
+					</div>
+					<figcaption class="film-cap">{f.caption}</figcaption>
+				</figure>
+			))}
+		</div>
+	</section>
+
+	{/* S03 — «Lo que horneo»: carta corta, обратный ритм 5/7. Без цен —
+	     presupuesto por DM. Фото справа с негативным салфеточным воздухом. */}
+	<section data-section="S03" class="mx-auto max-w-6xl px-5 py-10 md:py-24" aria-labelledby="s03-h">
+		<div class="carta">
+			<div class="carta-text">
+				<p class="eyebrow" data-reveal>{p.s03.eyebrow}</p>
+				<h2 id="s03-h" class="font-display text-h2" data-reveal>{p.s03.h2}</h2>
+				<ul class="carta-list" role="list" data-reveal>
+					{p.s03.items.map((it) => (
+						<li>
+							<h3 class="carta-item">{it.name}</h3>
+							<p class="carta-desc">{it.text}</p>
+						</li>
+					))}
+				</ul>
+				<p class="carta-out" data-reveal>{outroPre}<a class="text-link" href="/tartas/">la página de tartas</a>{outroPost}</p>
+			</div>
+			<figure class="frame-card carta-fig" data-reveal>
+				<CutPic
+					name="mini-carta-foto"
+					alt={p.s03.img_alt}
+					sizes="(min-width: 64rem) 52vw, 92vw"
+				/>
+			</figure>
+		</div>
+	</section>
+
+	{/* S04 — «Cómo trabajo»: surface-панель, абзац + 4 пилюли-факта.
+	     Рука 2/2 — подпись под абзацем. */}
+	{/* TEAM_038: md:py-20→16 — подтягиваем ритм к финалу (nit Q1). */}
+	<section data-section="S04" class="mx-auto max-w-6xl px-5 py-10 md:py-16" aria-labelledby="s04-h">
+		<div class="trabajo" data-reveal>
+			<div class="trabajo-text">
+				<p class="eyebrow">{p.s04.eyebrow}</p>
+				<h2 id="s04-h" class="font-display text-h2">{p.s04.h2}</h2>
+				<p class="trabajo-p">{p.s04.paragraph}</p>
+			</div>
+			{/* TEAM_044 (Q4-03 + Q1-17): пилюли-штамп → «spec-sheet»
+			     строки с hairline; подпись-рука опускается в низ правой
+			     колонки — закрывает мёртвые ~35% панели. */}
+			<div class="trabajo-side">
+				<ul class="trabajo-facts" role="list">
+					{p.s04.chips.map((c) => <li>{c}</li>)}
+				</ul>
+				<p class="hand-note trabajo-sign">{p.s04.signature}</p>
+			</div>
+		</div>
+	</section>
+
+	{/* S05 — «Esto acaba de empezar»: строка 60/40, CTA → IG DM
+	     (canonical href уже в data — instagram.com/dulcea.cake). */}
+	<section data-section="S05" class="mx-auto max-w-6xl px-5 pt-6 pb-14 md:pb-24">
+		<div class="final">
+			<p class="final-line font-display" data-reveal>{p.s05.line}</p>
+			<div class="final-ctas" data-reveal>
+				<a class="btn" href={p.s05.cta.href} target="_blank" rel="noopener">{p.s05.cta.label}</a>
+				<a class="text-link" href={p.s05.quiet.href}>{p.s05.quiet.label}</a>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</Base>
+
+<style>
+	/* — S01 apertura: grid-areas — мобайл фото между H1 и абзацами — */
+	.ap {
+		display: grid;
+		gap: 0 clamp(2rem, 4vw, 4rem);
+		grid-template-areas:
+			"eb"
+			"h1"
+			"fig"
+			"pp";
+	}
+	.ap-eb { grid-area: eb; }
+	.ap-h1 {
+		grid-area: h1;
+		font-weight: 560;
+		font-variation-settings: "opsz" 72;
+		font-size: var(--text-h1);
+		line-height: 1.04;
+		margin-top: 1.1rem;
+	}
+	/* TEAM_038 S01: «карточка на столе» — отпечаток в паспарту с
+	   широким нижним полем, Caveat-подпись лежит на самой карточке,
+	   под ней мягкий эллипс стол-тени (приподъём). */
+	/* TEAM_044 (Q1-15): критика §0.7 новее MF-1 «без наклона» —
+	   минимальный полароидный жест −1.8° + кусочек скотча на верхнем
+	   левом углу и тень, смещённая против наклона (правее-ниже). */
+	.ap-fig {
+		grid-area: fig;
+		margin-top: 1.8rem;
+		max-width: 16rem;
+		position: relative;
+		transform: rotate(-1.8deg);
+	}
+	.ap-fig::before {
+		/* washi-скотч: полупрозрачная карамельная полоска */
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: -0.55rem;
+		left: 18%;
+		width: 3.4rem;
+		height: 1.05rem;
+		background: color-mix(in srgb, var(--color-caramel-glow) 42%, transparent);
+		opacity: 0.8;
+		transform: rotate(-5deg);
+		border-radius: 1px;
+		box-shadow: 0 1px 2px rgb(60 42 32 / 0.12);
+	}
+	.ap-fig::after {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		left: 3%;
+		right: 8%;
+		bottom: -1rem;
+		height: 2.2rem;
+		background: radial-gradient(50% 50% at 50% 50%, rgb(60 42 32 / 0.32), transparent 72%);
+		filter: blur(8px);
+	}
+	.ap-fig .frame-card {
+		padding: clamp(0.7rem, 1.2vw, 0.95rem) clamp(0.7rem, 1.2vw, 0.95rem) 3.1rem;
+		box-shadow:
+			inset 0 1px 0 rgb(255 252 246 / 0.7),
+			0 1px 1px rgb(60 42 32 / 0.12),
+			0 12px 24px -12px rgb(60 42 32 / 0.3);
+	}
+	.ap-fig .frame-card :global(img) {
+		border: 1px solid rgb(60 42 32 / 0.14);
+	}
+	.ap-cap {
+		position: absolute;
+		left: 0.9rem;
+		right: 0.9rem;
+		bottom: 0.55rem;
+		text-align: center;
+	}
+	.ap-paras {
+		grid-area: pp;
+		margin-top: 1.8rem;
+		max-width: 56ch;
+		display: grid;
+		gap: 1rem;
+	}
+	@media (min-width: 1024px) {
+		.ap {
+			grid-template-columns: 7fr 5fr;
+			grid-template-areas:
+				"eb  fig"
+				"h1  fig"
+				"pp  fig"
+				"pp  .";
+			align-items: start;
+		}
+		.ap-fig { margin-top: 0.5rem; }
+	}
+
+	/* — S02 tira de contacto — */
+	.s02-line { margin-top: 0.9rem; color: var(--color-muted-ink); font-style: italic; }
+	/* TEAM_038 S02: tira de contacto — кадры смыкаются в единую ленту:
+	   фото заподлицо по бокам, дорожки перфорации вдоль верхней и
+	   нижней кромок, волосяные деления между кадрами, номер-«edge
+	   code» поверх кадра. Свайп со snap на мобайле сохранён. */
+	.film {
+		margin-top: 2rem;
+		display: grid;
+		gap: 1rem;
+	}
+	.film-frame { min-width: 0; }
+	@media (min-width: 768px) {
+		.film { grid-template-columns: repeat(3, 1fr); gap: 0; }
+		.film-frame + .film-frame .film-cell {
+			border-left: 1px solid rgb(247 240 234 / 0.16);
+		}
+		.film-frame:first-child .film-cell { border-radius: 3px 0 0 3px; }
+		.film-frame:last-child .film-cell { border-radius: 0 3px 3px 0; }
+	}
+	.film-cell {
+		position: relative;
+		background: var(--dark);
+		border-radius: 3px;
+		padding: 1.7rem 0 2rem;
+		box-shadow:
+			0 1px 2px rgb(60 42 32 / 0.12),
+			0 20px 38px -20px rgb(60 42 32 / 0.4);
+	}
+	/* перфорация: дорожки отверстий вдоль кромок кадра */
+	.film-cell::before,
+	.film-cell::after {
+		content: "";
+		position: absolute;
+		left: 10px;
+		right: 10px;
+		height: 8px;
+		background:
+			radial-gradient(closest-side, rgb(247 240 234 / 0.5) 96%, transparent)
+			left center / 26px 7px repeat-x;
+	}
+	.film-cell::before { top: 8px; }
+	.film-cell::after { bottom: 8px; }
+	.film-media {
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		box-shadow: inset 0 0 0 1px rgb(247 240 234 / 0.1);
+	}
+	.film-media :global(img) {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover; /* ~5% crop держит равную высоту кадров */
+	}
+	/* TEAM_044 (Q1-16): fotograma-1 темнее и холоднее пары — подъём
+	   экспозиции + лёгкая теплота; единый тон всей «плёнки». */
+	.film-frame:first-child .film-media :global(img) {
+		filter: brightness(1.09) sepia(0.16) saturate(1.04);
+	}
+	.film-num {
+		position: absolute;
+		top: 2.15rem;
+		right: 0.7rem;
+		font-size: 0.66rem;
+		letter-spacing: 0.12em;
+		color: var(--color-muted-light);
+		background: rgb(36 27 22 / 0.7);
+		padding: 0.15em 0.55em;
+		border-radius: 2px;
+	}
+	.film-cap {
+		margin-top: 0.7rem;
+		font-style: italic;
+		font-size: 0.95rem;
+		color: var(--color-muted-ink);
+	}
+	@media (max-width: 767.98px) {
+		/* свайп-плёнка: следующий кадр выглядывает ~16px */
+		.film {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scrollbar-width: none;
+			margin-inline: -1.25rem;
+			padding-inline: 1.25rem;
+		}
+		.film::-webkit-scrollbar { display: none; }
+		.film-frame {
+			flex: 0 0 calc(100% - 2rem);
+			scroll-snap-align: start;
+		}
+	}
+
+	/* — S03 carta corta: 5/7, обратный ритм к S01 — */
+	.carta {
+		display: grid;
+		gap: clamp(2rem, 5vw, 4rem);
+		align-items: start;
+	}
+	@media (min-width: 1024px) {
+		.carta { grid-template-columns: 5fr 7fr; }
+	}
+	.carta-list {
+		margin-top: 2.2rem;
+		list-style: none;
+		padding: 0;
+	}
+	.carta-list li {
+		padding-block: 1.15rem;
+		border-top: 1px solid color-mix(in srgb, var(--color-muted) 60%, transparent);
+	}
+	.carta-list li:last-child {
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 60%, transparent);
+	}
+	.carta-item {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.82rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	.carta-desc {
+		margin-top: 0.5rem;
+		font-size: 1rem;
+		font-style: italic; /* TEAM_038: меню-ритм — описание строкой рецепта */
+		color: var(--color-muted-ink);
+	}
+	.carta-out { margin-top: 1.6rem; max-width: 40ch; }
+	/* TEAM_038 S03: фото-карточка в семействе «на столе» — кромка
+	   отпечатка + эллипс стол-тени, как у S01. */
+	.carta-fig { max-width: 730px; position: relative; }
+	.carta-fig::after {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		left: 4%;
+		right: 4%;
+		bottom: -1.1rem;
+		height: 2.4rem;
+		background: radial-gradient(50% 50% at 50% 50%, rgb(60 42 32 / 0.3), transparent 72%);
+		filter: blur(9px);
+	}
+	.carta-fig :global(img) { border: 1px solid rgb(60 42 32 / 0.14); }
+
+	/* — S04 trabajo: surface-панель 7/5 — */
+	.trabajo {
+		background: var(--surface);
+		/* TEAM_038 S04: papel-фактура (зерно ~5%) + глубже тень —
+		   панель лежит на столе, а не висит плашкой. */
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.235 0 0 0 0 0.165 0 0 0 0 0.125 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+		border: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		border-radius: var(--radius-card);
+		box-shadow:
+			0 1px 1px rgb(60 42 32 / 0.08),
+			0 18px 38px -20px rgb(60 42 32 / 0.26);
+		padding: clamp(1.75rem, 4vw, 3rem);
+		display: grid;
+		gap: 2rem;
+	}
+	@media (min-width: 1024px) {
+		.trabajo { grid-template-columns: 7fr 5fr; align-items: start; }
+	}
+	.trabajo-p { margin-top: 1.4rem; max-width: 52ch; }
+	/* TEAM_044 (Q4-03): факты — «spec-sheet» строки между hairlines
+	   (мотив .carta-list), не пилюли; боковая колонка доводит панель
+	   до низа — подпись-рука становится опорой нижнего края. */
+	.trabajo-side {
+		display: grid;
+		align-content: start;
+		gap: 0;
+	}
+	.trabajo-facts {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	.trabajo-facts li {
+		display: flex;
+		align-items: baseline;
+		gap: 0.7rem;
+		padding: 0.68rem 0;
+		border-top: 1px solid color-mix(in srgb, var(--color-muted) 55%, transparent);
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.78rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-ink);
+	}
+	.trabajo-facts li:last-child {
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 55%, transparent);
+	}
+	.trabajo-facts li::before {
+		content: "—";
+		color: var(--color-caramel);
+		flex: 0 0 auto;
+	}
+	.trabajo-sign { margin-top: 1.15rem; justify-self: start; }
+	@media (min-width: 1024px) {
+		.trabajo-side { align-self: stretch; align-content: space-between; }
+		.trabajo-sign { justify-self: end; margin-top: 0; }
+	}
+
+	/* — S05 финал: TEAM_044 (Q1-18) — центрированная группа:
+	   цитата → короткая hairline-связка → ряд CTA. — */
+	.final {
+		display: grid;
+		justify-items: center;
+		text-align: center;
+		border-top: 1.5px solid var(--color-caramel);
+		padding-top: 2.8rem;
+	}
+	.final-line {
+		font-style: italic;
+		font-weight: 560;
+		font-size: var(--text-h3);
+		line-height: 1.25;
+		max-width: 30ch;
+		margin-inline: auto;
+	}
+	/* hairline-связка цитата→кнопки */
+	.final-line::after {
+		content: "";
+		display: block;
+		width: 1px;
+		height: 1.9rem;
+		margin: 1.5rem auto 0;
+		background: color-mix(in srgb, var(--color-caramel) 75%, transparent);
+	}
+	.final-ctas {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap;
+		gap: 1rem 1.6rem;
+		margin-top: 1.5rem;
+	}
+	@media (max-width: 640px) {
+		.final-ctas { flex-direction: column; align-items: stretch; }
+		.final-ctas .btn { width: 100%; justify-content: center; }
+		.final-ctas .text-link { align-self: center; }
+	}
+</style>

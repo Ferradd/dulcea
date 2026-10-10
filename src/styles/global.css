@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+/* TEAM_027: SITE_SCRIPT G.2 palette + G.3 «La mesa editorial» type system.
+   Fraunces Variable (display/wordmark 560–600) · Jost (body/UI/eyebrow/CTA)
+   · Caveat (hand, ≤2/page). Marcellus/Great Vibes/Cormorant removed — not in
+   the chosen system. */
+@theme {
+  --color-cream:   #F7F0EA; /* --bg */
+  --color-surface: #EFE3D9; /* --surface */
+  --color-ink:     #3C2A20; /* --text */
+  --color-caramel: #A9663B; /* --accent */
+  --color-berry:   #AB3E2E; /* --accent-2 */
+  --color-muted:   #B3A296; /* --muted */
+  --color-choco:   #241B16; /* --dark */
+  /* WCAG-AA text variants (carried from TEAM_012):
+     caramel is decorative ≥3:1; -ink is the text-on-light variant,
+     -glow text-on-dark, muted-ink/-light for captions. */
+  --color-caramel-ink:  #8A5330;
+  --color-caramel-glow: #D9A06B;
+  --color-muted-ink:    #6E5F51;
+  --color-muted-light:  #CBB8A7;
+
+  --font-display: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans:    "Jost", "Avenir Next", system-ui, sans-serif;
+  --font-hand:    "Caveat", "Comic Sans MS", cursive;
+
+  /* G.3 scale: H1/H2 64–88px / 40–48 mobile; body 17–18/1.6 */
+  --text-h1: clamp(2.5rem, 1.6rem + 4.4vw, 5.5rem);
+  --text-h1--line-height: 1.04;
+  --text-h2: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  --text-h2--line-height: 1.06;
+  --text-h3: clamp(1.35rem, 1.15rem + 1vw, 1.65rem);
+  --text-h3--line-height: 1.2;
+  --text-eyebrow: 0.8rem;              /* 12.5–14px */
+  --text-eyebrow--line-height: 1.35;
+  --text-body-lg: clamp(1.06rem, 1rem + 0.3vw, 1.13rem);
+  --text-body-lg--line-height: 1.6;
+  --text-hand: clamp(1.4rem, 1.2rem + 1vw, 1.9rem);
+  --text-hand--line-height: 1.15;
+
+  --radius-card: 6px;
+
+  --ease-reveal: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --shadow-card:
+    0 1px 2px rgb(60 42 32 / 0.05),
+    0 12px 32px -14px rgb(60 42 32 / 0.22);
+  --shadow-contact:
+    0 1px 1px rgb(60 42 32 / 0.10),
+    0 18px 40px -18px rgb(60 42 32 / 0.30);
+}
+
+/* Canonical SITE_SCRIPT custom props — components may read these directly. */
+:root {
+  --bg: var(--color-cream);
+  --surface: var(--color-surface);
+  --text: var(--color-ink);
+  --accent: var(--color-caramel);
+  --accent-2: var(--color-berry);
+  --muted: var(--color-muted);
+  --dark: var(--color-choco);
+  color-scheme: light;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  /* TEAM_045 Q3-02: horizontal-bleed страховка на весь сайт — clip не
+     создаёт scroll-контейнер, sticky и cover-stack не ломаются. */
+  html, body { overflow-x: clip; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body-lg);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--color-caramel-ink); color: var(--color-cream); }
+  :focus-visible {
+    outline: 2px solid var(--color-caramel-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  video:focus-visible {
+    outline: 3px solid var(--color-caramel-glow);
+    outline-offset: 2px;
+  }
+  h1, h2, h3 { text-wrap: balance; }
+  /* TEAM_012: <picture> is a source-negotiation wrapper — layout-transparent. */
+  picture { display: contents; }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+    z-index: 60;
+    /* TEAM_045 Q2-01: hit-area ≥44px без смены визуала */
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    background: var(--color-choco);
+    color: var(--color-cream);
+    border-radius: 0 0 0.5rem 0.5rem;
+    transform: translateY(-150%);
+    transition: transform 0.25s var(--ease-reveal);
+  }
+  .skip-link:focus-visible { transform: translateY(0); }
+}
+
+@layer components {
+  /* — Typography (G.3 «La mesa editorial») — */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--text-eyebrow);
+    letter-spacing: 0.15em;            /* G.3: tracking ≤ .16em */
+    text-transform: uppercase;
+    color: var(--color-caramel-ink);
+  }
+  .hand-note {
+    font-family: var(--font-hand);
+    font-weight: 500;
+    font-size: var(--text-hand);
+    line-height: 1.15;
+    color: var(--color-caramel-ink);
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 560;                  /* G.1: wordmark Fraunces 560 */
+    font-variation-settings: "opsz" 40;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    line-height: 1;
+  }
+  .caption {
+    font-size: 0.85rem;
+    color: var(--color-muted-ink);
+  }
+
+  /* — Buttons (G.3: Jost 500 caps 14px, --accent fill) — */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55em;
+    /* TEAM_045 Q2-01: все CTA-кнопки ≥44px по высоте */
+    min-height: 2.75rem;
+    padding: 0.78em 1.6em;
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--color-caramel-ink); /* AA-safe fill of --accent */
+    color: var(--color-cream);
+    transition: transform 0.35s var(--ease-reveal), background-color 0.35s var(--ease-reveal);
+  }
+  .btn:hover { background: var(--color-berry); transform: translateY(-1px); }
+  .btn:active { transform: translateY(0) scale(0.98); }
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 1px var(--color-muted-ink);
+  }
+  .btn--ghost:hover { background: var(--color-surface); color: var(--color-ink); }
+
+  .text-link {
+    /* TEAM_045 Q2-01: hit-area 44px для «La quiero →» и «…paso a paso →»
+       (разметка в чужих файлах) — inline-flex центрирует текст, подчёрк-
+       ивание переезжает на text-decoration, чтобы не уезжало вниз бокса. */
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-caramel-ink);
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+  .text-link:hover { color: var(--color-berry); }
+
+  /* — Fact chips (G.3: caps Jost + dot --accent-2 + outline pill) — */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.4em 1em;
+    border: 1px solid var(--color-muted);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink);
+    background: color-mix(in srgb, var(--color-surface) 55%, transparent);
+  }
+  .chip::before {
+    content: "";
+    width: 0.45em;
+    height: 0.45em;
+    border-radius: 999px;
+    background: var(--color-berry);
+  }
+
+  /* — «карточка на столе»: surface frame + hairline + contact shadow — */
+  .frame-card {
+    display: block;
+    background: var(--color-surface);
+    padding: clamp(0.75rem, 1.6vw, 1.25rem);
+    border: 1px solid color-mix(in srgb, var(--color-muted) 55%, transparent);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-contact);
+  }
+  .frame-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: calc(var(--radius-card) - 3px);
+  }
+
+  /* — G.7 «filete de capas»: 6 wavy hairlines, the rib-side cut motif — */
+  .filete {
+    display: block;
+    width: 100%;
+    height: 18px;
+    border: 0;
+    color: var(--color-muted);
+    background:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='18' viewBox='0 0 120 18'%3E%3Cg fill='none' stroke='%23B3A296' stroke-width='1'%3E%3Cpath d='M0 2.5 Q15 .5 30 2.5 T60 2.5 T90 2.5 T120 2.5' opacity='.9'/%3E%3Cpath d='M0 6 Q15 4.4 30 6 T60 6 T90 6 T120 6' opacity='.7'/%3E%3Cpath d='M0 9.5 Q15 8 30 9.5 T60 9.5 T90 9.5 T120 9.5' opacity='.55'/%3E%3Cpath d='M0 12.5 Q15 11.4 30 12.5 T60 12.5 T90 12.5 T120 12.5' opacity='.4'/%3E%3Cpath d='M0 15.5 Q15 14.6 30 15.5 T60 15.5 T90 15.5 T120 15.5' opacity='.28'/%3E%3C/g%3E%3C/svg%3E")
+      repeat-x center / auto 18px;
+  }
+
+  /* — Entrance system: [data-reveal] + IO adds .in once.
+       Hidden state is gated behind .js so no-JS/reduced-motion show all. — */
+  [data-reveal] {
+    transition:
+      opacity 0.6s var(--ease-reveal) var(--d, 0ms),
+      transform 0.6s var(--ease-reveal) var(--d, 0ms);
+  }
+  .js [data-reveal] { opacity: 0; transform: translateY(14px) scale(0.96); }
+  .js [data-reveal].in { opacity: 1; transform: none; }
+
+  /* — G.5 «capas apiladas»: sticky layers only for tall scenes (≥80svh);
+       the entering panel's top edge is a 1.5px --accent cut seam.
+       .pin = departing layer (dims via --cover from initCoverStack);
+       .panel = entering layer — MUST be opaque to cover honestly. — */
+  .pin {
+    position: sticky;
+    top: 0;
+    z-index: 0;
+    /* TEAM_036 BUG-1: alpha fade let the pinned layer underneath (hero
+       stays sticky under the whole page) bleed through the panel, and
+       scaling the panel's own box opened a wedge at its bottom edge
+       where it showed through too. Now the panel dims via brightness —
+       always opaque — and only its inner content recedes, so the
+       section background keeps the layout box filled. */
+    filter: brightness(calc(1 - var(--cover, 0) * 0.55));
+  }
+  .pin > * {
+    transform: scale(calc(1 - var(--cover, 0) * 0.03));
+    transform-origin: center;
+  }
+  .seam { border-top: 1.5px solid var(--color-caramel); }
+  .panel {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+  }
+}
+
+/* TEAM_045 Q1-22: глобальная подстраховка под sticky-нав (4.25rem + воздух).
+   tartas имеет scoped-правило; faq получит от FX2 — это покрывает остальные. */
+section[id],
+details[id] {
+  scroll-margin-top: 4.75rem;
+}
+
+/* TEAM_045 Q2-02: @390 мёртвые полосы 110–200px между секциями — стек
+   py-20/py-24 соседей. Утилиты лежат в @layer utilities, поэтому кэп идёт
+   незалayerенным блоком (бьёт слои). Десктопный ритм не тронут. */
+@media (max-width: 640px) {
+  .py-20 { padding-top: 3rem; padding-bottom: 3rem; }
+  .py-24 { padding-top: 3rem; padding-bottom: 3rem; }
+  .pt-14 { padding-top: 3.25rem; }
+  .pb-16 { padding-bottom: 3rem; }
+  .pt-20 { padding-top: 3rem; }
+  .pb-20 { padding-bottom: 3rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js [data-reveal],
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  /* G.5: the stack unrolls into a normal flow under reduced motion. */
+  .pin { position: static !important; }
+}

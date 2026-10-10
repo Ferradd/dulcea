@@ -1,0 +1,89 @@
+---
+// TEAM_027: Base layout — lang=es, SEO slots, «La mesa editorial» fonts
+// (Fraunces Variable display + Jost UI + Caveat hand), favicons, font
+// preloads, skip-link, header/footer slots, shared motion init.
+import '../styles/global.css';
+import '../styles/bakery.css';
+import '@fontsource-variable/fraunces/index.css';
+import '@fontsource-variable/fraunces/wght-italic.css';
+import '@fontsource/jost/400.css';
+import '@fontsource/jost/400-italic.css';
+import '@fontsource/jost/500.css';
+import '@fontsource/caveat/400.css';
+import '@fontsource/caveat/500.css';
+
+import fontDisplay from '@fontsource-variable/fraunces/files/fraunces-latin-wght-normal.woff2';
+import fontBody from '@fontsource/jost/files/jost-latin-400-normal.woff2';
+import fontUi from '@fontsource/jost/files/jost-latin-500-normal.woff2';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogImage?: string;
+	/** Page <body> classes, e.g. theme overrides */
+	bodyClass?: string;
+}
+
+const {
+	title = 'dulcea · tartas artesanales en Cartagena',
+	description = 'Tartas artesanales hechas por encargo en Cartagena, Murcia. Pedidos por DM en Instagram.',
+	ogImage = '/favicon.svg',
+	bodyClass = '',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#F7F0EA" />
+		<slot name="head" />
+
+		{/* Open Graph (es-ES) */}
+		<meta property="og:type" content="website" />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary" />
+
+		{/* Favicons */}
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+		<link rel="apple-touch-icon" href="/favicon-32.png" />
+
+		{/* Font preloads: above-fold faces, build-resolved hashed URLs */}
+		<link rel="preload" href={fontDisplay} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={fontBody} as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href={fontUi} as="font" type="font/woff2" crossorigin />
+
+		{/* Gate hidden-reveal state behind JS so content never sticks hidden */}
+		<script is:inline>document.documentElement.classList.add('js');</script>
+	</head>
+	<body class:list={['bakery', bodyClass]} data-page={Astro.url.pathname.split('/')[1] || 'inicio'}>
+		<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+		<slot name="header" />
+
+		<main id="contenido">
+			<slot />
+		</main>
+
+		<slot name="footer" />
+
+		<script>
+			// TEAM_027: one motion module for the whole site — reveal cascade
+			// (~80ms sibling stagger) + cover stack + lazy video / click-toggle.
+			import { initReveal, initCoverStack, initLazyVideo } from '../lib/reveal';
+			initReveal();
+			initCoverStack();
+			initLazyVideo();
+		</script>
+	</body>
+</html>

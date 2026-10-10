@@ -1,0 +1,736 @@
+---
+// TEAM_028: tartas «/» — SITE_SCRIPT tartas S01–S07. «La mesa editorial»:
+// rail-индекс карты → три оblea-диады entera→corte (S04 — фигура + mount-
+// point аннотации для W-воркера) → queso-полка → пластина «La tuya» →
+// cierre-полоса. Copy только из sections.json; фото только cut/ via CutPic.
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import CutPic from '../components/CutPic.astro';
+import MiraLasCapas from '../components/MiraLasCapas.astro'; // TEAM_029: S04 wow-аннотация
+import site from '../data/sections.json';
+
+const p = site.tartas;
+---
+
+<Base title={p.meta.title} description={p.meta.description}>
+	<Nav slot="header" />
+
+	{/* S01 — «la carta» cabecera: левый текст ~60ch + горизонтальный
+	     rail-индекс из 5 якорей между hairlines. Без фото. */}
+	<section data-section="S01" class="carta" aria-labelledby="carta-h">
+		<div class="carta-wrap mx-auto w-full max-w-6xl px-5">
+			{/* TEAM_044 (Q1-07): тихий слой в правом поле шапки — пять
+			     штрихов-тиков, эхо пяти ячеек rail-индекса. */}
+			<span class="carta-marks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+			<div class="carta-text">
+				<p class="eyebrow" data-reveal>{p.s01.eyebrow}</p>
+				<h1 id="carta-h" class="font-display carta-h1" data-reveal>{p.s01.h1}</h1>
+				<p class="carta-lede" data-reveal>{p.s01.lede}</p>
+			</div>
+			<nav class="rail" aria-label="La carta" data-reveal>
+				{p.s01.rail.map((r, i) => (
+					<a class="rail-cell" href={r.href}>
+						<span class="rail-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}.</span>
+						<span class="rail-label">{r.label}</span>
+						<span class="rail-go" aria-hidden="true">→</span>
+					</a>
+				))}
+			</nav>
+		</div>
+	</section>
+
+	{/* S02 — nocilla: текст ~38% + staggered-диада справа (main entera
+	     + porción; second — наклонный поляроид сдвинут вниз-вправо). */}
+	<section data-section="S02" id="nocilla" class="tarta" aria-labelledby="s02-h">
+		<div class="pair-grid mx-auto w-full max-w-6xl px-5">
+			<div class="tarta-text">
+				<p class="eyebrow" data-reveal>{p.s02.eyebrow}</p>
+				<h2 id="s02-h" class="font-display text-h2" data-reveal>{p.s02.h2}</h2>
+				<p class="sensory" data-reveal>{p.s02.sensory}</p>
+				<p class="tarta-body" data-reveal>{p.s02.composition}</p>
+				<p class="tarta-cta" data-reveal>
+					<a class="text-link" href={p.s02.cta.href}>{p.s02.cta.label}</a>
+				</p>
+				{/* TEAM_044 (Q1-14): низ колонки — тихий слой: тонкий
+				     срез страт (capas-macro) как подпись-концовка. */}
+				<span class="capas-rule" data-reveal aria-hidden="true">
+					<CutPic name="capas-macro" alt="" sizes="13rem" />
+				</span>
+			</div>
+			<figure class="pair pair--stagger" data-reveal>
+				<div class="ph pair-a">
+					<CutPic
+						name="nocilla-pair-main"
+						alt={p.s02.img_alt_main}
+						sizes="(min-width: 64rem) 32vw, 82vw"
+					/>
+				</div>
+				<div class="ph pair-b">
+					<CutPic
+						name="nocilla-pair-second"
+						alt={p.s02.img_alt_second}
+						sizes="(min-width: 64rem) 17vw, 46vw"
+					/>
+				</div>
+				<figcaption class="hand-note pair-cap">{p.s02.caption}</figcaption>
+			</figure>
+		</div>
+	</section>
+
+	{/* S03 — filipinos: диада с общей базовой линией слева — porción
+	     крупнее и впереди («su porción de cerca»), entera за ней,
+	     лёгкий наезд; hand-note caption, текст справа. */}
+	<section data-section="S03" id="filipinos" class="tarta" aria-labelledby="s03-h">
+		<div class="duo-grid mx-auto w-full max-w-6xl px-5">
+			<figure class="duo" data-reveal>
+				<div class="ph duo-a">
+					<CutPic
+						name="filipinos-pair-entera"
+						alt={p.s03.img_alt_entera}
+						sizes="(min-width: 64rem) 27vw, 45vw"
+					/>
+				</div>
+				<div class="ph duo-b">
+					<CutPic
+						name="filipinos-pair-porcion"
+						alt={p.s03.img_alt_porcion}
+						sizes="(min-width: 64rem) 30vw, 45vw"
+					/>
+				</div>
+				<figcaption class="hand-note duo-cap">{p.s03.caption}</figcaption>
+			</figure>
+			<div class="tarta-text">
+				<p class="eyebrow" data-reveal>{p.s03.eyebrow}</p>
+				<h2 id="s03-h" class="font-display text-h2" data-reveal>{p.s03.h2}</h2>
+				<p class="sensory" data-reveal>{p.s03.sensory}</p>
+				<p class="tarta-body" data-reveal>{p.s03.composition}</p>
+				<p class="tarta-cta" data-reveal>
+					<a class="text-link" href={p.s03.cta.href}>{p.s03.cta.label}</a>
+				</p>
+				{/* TEAM_044 (Q1-14): низ колонки — тот же слой-срез. */}
+				<span class="capas-rule" data-reveal aria-hidden="true">
+					<CutPic name="capas-macro" alt="" sizes="13rem" />
+				</span>
+			</div>
+		</div>
+	</section>
+
+	{/* S04 — barritas: узкий текст ~30% + сцена-фигура в тонкой рамке
+	     (аннотация «mira las capas» = семантический mount-point для
+	     W-воркера, data-annotation="capas") + спутник ниже-правее. */}
+	<section data-section="S04" id="barritas" class="tarta" aria-labelledby="s04-h">
+		<div class="corte-grid mx-auto w-full max-w-6xl px-5">
+			<div class="tarta-text">
+				<p class="eyebrow" data-reveal>{p.s04.eyebrow}</p>
+				<h2 id="s04-h" class="font-display text-h2" data-reveal>{p.s04.h2}</h2>
+				<p class="sensory" data-reveal>{p.s04.sensory}</p>
+				<p class="tarta-body" data-reveal>{p.s04.composition}</p>
+				<p class="tarta-cta" data-reveal>
+					<a class="text-link" href={p.s04.cta.href}>{p.s04.cta.label}</a>
+				</p>
+			</div>
+			<div class="corte-stage">
+				<figure class="corte-fig" data-reveal>
+					<CutPic
+						name="barritas-figura"
+						alt={p.s04.img_alt_figura}
+						sizes="(min-width: 64rem) 44vw, 92vw"
+					/>
+				</figure>
+				{/* TEAM_028: mount-point для W-воркера — текст + doodle-дуга;
+				     аннотация доделывается им, здесь только честная посадка. */}
+				{/* TEAM_029: живая аннотация — компонент владеет note+arrow+draw,
+				     grid-ячейка .capas-note владеет только посадкой */}
+				<div class="capas-note" data-annotation="capas" data-reveal>
+					<MiraLasCapas text={p.s04.hand_note} />
+				</div>
+				<figure class="ph corte-sat" data-reveal>
+					<CutPic
+						name="barritas-satelite"
+						alt={p.s04.img_alt_satelite}
+						sizes="(min-width: 64rem) 20vw, 56vw"
+					/>
+				</figure>
+			</div>
+		</div>
+	</section>
+
+	{/* S05 — queso: поверхность --surface, центрированный текст ~44ch
+	     + «полка»: два малых 3:4 кадра на общей hairline-базе. */}
+	<section data-section="S05" id="queso" class="tarta surface-band" aria-labelledby="s05-h">
+		<div class="mx-auto w-full max-w-6xl px-5">
+			<div class="qs-text">
+				<p class="eyebrow" data-reveal>{p.s05.eyebrow}</p>
+				<h2 id="s05-h" class="font-display text-h2" data-reveal>{p.s05.h2}</h2>
+				<p class="sensory" data-reveal>{p.s05.sensory}</p>
+				<p class="tarta-body qs-body" data-reveal>{p.s05.body}</p>
+				<p class="tarta-cta" data-reveal>
+					<a class="text-link" href={p.s05.cta.href}>{p.s05.cta.label}</a>
+				</p>
+			</div>
+			<div class="qs-shelf" data-reveal>
+				<figure class="ph qs-frame">
+					{/* TEAM_044 (Q1-10/Q1-13): тёплый градированный entera —
+					     холодный серо-голубой кадр заменён. */}
+					<CutPic
+						name="queso-entera-warm"
+						alt={p.s05.img_alt_entera}
+						sizes="(min-width: 64rem) 260px, 52vw"
+					/>
+				</figure>
+				<figure class="ph qs-frame">
+					<CutPic
+						name="queso-shelf-porcion"
+						alt={p.s05.img_alt_porcion}
+						sizes="(min-width: 64rem) 205px, 40vw"
+					/>
+				</figure>
+				<hr class="qs-hair" aria-hidden="true" />
+				<p class="caption qs-cap">{p.s05.captions[0]}</p>
+				<p class="caption qs-cap">{p.s05.captions[1]}</p>
+			</div>
+		</div>
+	</section>
+
+	{/* S06 — «la tuya»: широкая полоса между hairlines — пластина
+	     двойной рамки ~32% + текст ~60%. Намеренно без фото. */}
+	<section data-section="S06" id="la-tuya" class="latuya" aria-labelledby="s06-h">
+		<div class="latuya-grid mx-auto w-full max-w-6xl px-5">
+			{/* TEAM_044 (Q1-11): пластина как эскиз «своей» торты —
+			     контурный дудл цилиндра со стратами + полароидный наклон;
+			     канон-текст без изменений. */}
+			<div class="plate" data-reveal>
+				<div class="plate-in">
+					<svg class="plate-sketch" viewBox="0 0 120 62" fill="none" aria-hidden="true" focusable="false">
+						<path d="M14 14 a46 10 0 1 0 92 0 a46 10 0 1 0 -92 0" />
+						<path d="M14 14 V38" />
+						<path d="M106 14 V38" />
+						<path d="M14 38 a46 10 0 0 0 92 0" />
+						<path d="M15 24 Q40 30.5 60 29.5 T105 24" />
+						<path d="M15 31 Q40 37 60 36 T105 31" />
+					</svg>
+					<p class="plate-hand">{p.s06.plate_script}</p>
+					<p class="plate-sub">{p.s06.plate_descriptor}</p>
+				</div>
+			</div>
+			<div class="tarta-text">
+				<p class="eyebrow" data-reveal>{p.s06.eyebrow}</p>
+				<h2 id="s06-h" class="font-display text-h2" data-reveal>{p.s06.h2}</h2>
+				<ul class="la-list" data-reveal>
+					{p.s06.bullets.map((item) => <li>{item}</li>)}
+				</ul>
+				<p class="la-note" data-reveal>{p.s06.note}</p>
+				<p class="tarta-cta" data-reveal>
+					<a class="text-link" href={p.s06.cta.href}>{p.s06.cta.label}</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	{/* S07 — cierre: filete-страта + функциональная полоса
+	     intro | 3 шага + quiet | btn-CTA. Без фото. */}
+	<section data-section="S07" class="cierre" aria-labelledby="s07-h">
+		<div class="mx-auto w-full max-w-6xl px-5">
+			<hr class="filete" aria-hidden="true" data-reveal />
+			<div class="cierre-grid">
+				<div class="c-intro" data-reveal>
+					<p class="eyebrow" id="s07-h">{p.s07.eyebrow}</p>
+					<p class="font-display c-lead">{p.s07.lead}</p>
+				</div>
+				<div class="c-steps" data-reveal>
+					<ol class="c-ol">
+						{p.s07.steps.map((s, i) => <li><span class="c-n" aria-hidden="true">{i + 1} · </span>{s}</li>)}
+					</ol>
+					<p class="caption c-quiet">{p.s07.quiet}</p>
+				</div>
+				<p class="c-cta" data-reveal>
+					<a class="btn" href={p.s07.cta.href}>{p.s07.cta.label}</a>
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<Footer slot="footer" />
+</Base>
+
+<style>
+	/* — shared bits — */
+	section[id] { scroll-margin-top: 4.75rem; } /* sticky nav 4.25rem + воздух */
+
+	.tarta { padding-block: clamp(3.5rem, 8vw, 6rem); }
+	.surface-band { background: var(--surface); }
+
+	/* «кадр на столе»: тонкая рамка + контактная тень вокруг запечённого
+	   поля #EFE3D9 — единый mount для всех фото-пар. */
+	.ph {
+		background: var(--surface);
+		border: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		box-shadow: var(--shadow-contact);
+	}
+	.ph img {
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.tarta-text { max-width: 42ch; }
+	.sensory {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: 500;
+		font-size: var(--text-h3);
+		line-height: 1.25;
+		color: var(--color-caramel-ink);
+		margin-top: 1.15rem;
+	}
+	.tarta-body { margin-top: 1.2rem; }
+	.tarta-cta { margin-top: 1.9rem; }
+
+	/* TEAM_044 (Q1-14): «концовка колонки» — тонкий срез страт
+	   (capas-macro) как подпись-кромка под текстовой колонкой;
+	   декоративный, текст канона не тронут. */
+	.capas-rule {
+		display: block;
+		width: min(13rem, 58%);
+		margin-top: 2.3rem;
+	}
+	.capas-rule :global(picture) { display: block; }
+	.capas-rule :global(img) {
+		display: block;
+		width: 100%;
+		height: 7px;
+		object-fit: cover;
+		object-position: 50% 42%;
+		border-radius: 1px;
+		opacity: 0.85;
+	}
+
+	/* — S01 «la carta» — */
+	.carta {
+		padding-block: clamp(3.5rem, 9vh, 6rem) clamp(3rem, 7vh, 5rem);
+	}
+	.carta-wrap { position: relative; }
+	/* TEAM_044 (Q1-07): тихий слой в правом поле шапки — пять тиков
+	   возрастающей высоты, эхо пяти ячеек rail-индекса. */
+	.carta-marks {
+		display: none;
+		position: absolute;
+		top: 0.15rem;
+		right: 0;
+		align-items: flex-end;
+		gap: 0.55rem;
+	}
+	.carta-marks i {
+		display: block;
+		width: 1px;
+		background: color-mix(in srgb, var(--color-muted) 65%, transparent);
+	}
+	.carta-marks i:nth-child(1) { height: 9px; }
+	.carta-marks i:nth-child(2) { height: 14px; }
+	.carta-marks i:nth-child(3) { height: 19px; }
+	.carta-marks i:nth-child(4) { height: 24px; }
+	.carta-marks i:nth-child(5) { height: 30px; background: var(--color-caramel); }
+	@media (min-width: 1024px) { .carta-marks { display: flex; } }
+	.carta-text { max-width: 60ch; }
+	.carta-h1 {
+		font-weight: 560;
+		font-variation-settings: "opsz" 72;
+		font-size: var(--text-h1);
+		line-height: 1.04;
+		margin-top: 1.1rem;
+	}
+	.carta-lede { margin-top: 1.5rem; }
+
+	.rail {
+		margin-top: clamp(2.5rem, 6vh, 4rem);
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		border-top: 1px solid color-mix(in srgb, var(--color-muted) 60%, transparent);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 60%, transparent);
+	}
+	.rail-cell {
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+		gap: 0.55em;
+		padding: 1.05rem 0.5rem;
+		color: var(--color-ink);
+		text-decoration: none;
+		/* TEAM_041: ячейка-индекс карты: подложка на hover = объект, не плашка */
+		transition: background 0.25s ease;
+	}
+	.rail-cell:hover,
+	.rail-cell:focus-visible {
+		background: color-mix(in srgb, var(--surface) 55%, transparent);
+	}
+	.rail-cell:nth-child(n + 4) {
+		border-top: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+	}
+	.rail-n {
+		font-family: var(--font-display);
+		font-style: italic;
+		font-weight: 500;
+		font-size: 0.8rem;
+		color: var(--color-muted-ink);
+	}
+	.rail-label {
+		position: relative;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.82rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		padding-bottom: 0.35em;
+		white-space: nowrap;
+	}
+	/* TEAM_044 (Q1-07): аффорданс — микро-стрелка после метки:
+	   тихая в покое, оживает на hover/focus. */
+	.rail-go {
+		align-self: center;
+		font-size: 0.78rem;
+		line-height: 1;
+		color: var(--color-caramel);
+		opacity: 0.55;
+		transition:
+			opacity 0.25s ease,
+			transform 0.25s var(--ease-reveal);
+		display: none; /* TEAM_044: @<640 ячейки и так впритык — без стрелок */
+	}
+	@media (min-width: 640px) { .rail-go { display: inline; } }
+	.rail-cell:hover .rail-go,
+	.rail-cell:focus-visible .rail-go {
+		opacity: 1;
+		transform: translateX(3px);
+	}
+	/* hover — «rasgo de nata»: короткий густой штрих под меткой */
+	.rail-label::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 0;
+		width: 2em;
+		height: 2.5px;
+		border-radius: 2px;
+		background: var(--color-caramel);
+		transform: translateX(-50%) scaleX(0);
+		transition: transform 0.3s var(--ease-reveal);
+	}
+	.rail-cell:hover .rail-label::after,
+	.rail-cell:focus-visible .rail-label::after {
+		transform: translateX(-50%) scaleX(1);
+	}
+	@media (min-width: 640px) {
+		.rail { grid-template-columns: repeat(5, 1fr); }
+		.rail-cell:nth-child(n + 4) { border-top: 0; }
+		.rail-cell + .rail-cell {
+			border-left: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		}
+	}
+
+	/* — S02 staggered pair — */
+	.pair-grid, .duo-grid {
+		display: grid;
+		gap: clamp(2.5rem, 5vw, 4.5rem);
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		.pair-grid { grid-template-columns: 7fr 11fr; }
+	}
+	.pair--stagger {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		margin: 0 auto;
+		max-width: 35rem; /* G.6: main кадр ≤ нативные 426px */
+	}
+	/* TEAM_041: общая базовая линия — оба кадра «стоят на столе», малый
+	   перекрывает больший глубже; провисающего степа нет */
+	.pair-a { grid-column: 1 / 10; grid-row: 1; align-self: end; }
+	.pair-b {
+		grid-column: 8 / 13;
+		grid-row: 1;
+		align-self: end;
+		margin-left: -5%;
+		z-index: 1;
+	}
+	/* TEAM_041: подписи пар — заметки рукой на полях у переднего кадра */
+	.pair-cap, .duo-cap {
+		grid-column: 1 / -1;
+		grid-row: 2;
+		justify-self: end;
+		margin: 0.8rem 3% 0 0;
+		transform: rotate(-1.3deg);
+	}
+
+	/* — S03 duo — */
+	@media (min-width: 1024px) {
+		.duo-grid { grid-template-columns: 12fr 7fr; }
+	}
+	.duo {
+		display: grid;
+		/* TEAM_041: были две равные колонки (плашки). Теперь диада:
+		   porción крупнее и впереди (caption — «su porción de cerca»),
+		   entera меньше позади, общая базовая линия + наезд */
+		grid-template-columns: repeat(16, 1fr);
+		margin: 0;
+	}
+	.duo-a { grid-column: 1 / 8; grid-row: 1; align-self: end; }
+	.duo-b {
+		grid-column: 7 / 16;
+		grid-row: 1;
+		align-self: end;
+		margin-left: -6%;
+		z-index: 1;
+	}
+
+	/* — S04 corte stage — */
+	.corte-grid {
+		display: grid;
+		gap: clamp(2.5rem, 5vw, 4.5rem);
+		align-items: center;
+	}
+	@media (min-width: 1024px) {
+		/* TEAM_044 (Q1-08): колонка 5→6fr — eyebrow «…NOCILLA Y
+		   BARRITAS» перестаёт рваться на 7-й позиции. */
+		.corte-grid { grid-template-columns: 6fr 12fr; }
+	}
+	/* TEAM_044 (Q1-08): трекинг чуть плотнее только в этой секции —
+	   «TARTA · OBLEAS CON NOCILLA Y BARRITAS» в одну строку. */
+	.corte-grid .eyebrow { letter-spacing: 0.1em; }
+	.corte-stage {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		max-width: 38.5rem; /* G.6: figura ≤ нативные 569px */
+	}
+	.corte-fig {
+		grid-column: 1 / 11;
+		grid-row: 1;
+		margin: 0;
+		border: 1px solid color-mix(in srgb, var(--color-muted) 55%, transparent);
+		/* TEAM_041: тень-стол под фигурой — срез стоит на поверхности */
+		box-shadow:
+			0 24px 36px -18px rgb(60 42 32 / 0.4),
+			0 5px 10px -5px rgb(60 42 32 / 0.28);
+	}
+	.corte-fig img { display: block; width: 100%; height: auto; }
+	.capas-note {
+		/* TEAM_044 (Q1-09): заметка держится за верх кадра, но стрелка
+		   стала длинной S-кривой (см. MiraLasCapas) — остриё падает
+		   на нижнюю кромку лицевого среза (~914px, ~88% высоты фигуры),
+		   не на верхнюю корку. Текст остаётся на светлом поле паспарту. */
+		grid-column: 8 / 11;
+		grid-row: 1;
+		align-self: start;
+		margin-top: -0.3rem;
+		text-align: left;
+	}
+	/* TEAM_029: .capas-note-text/.capas-arrow стили переехали в
+	   MiraLasCapas.astro (компонент владеет видом аннотации). */
+	.corte-sat {
+		grid-column: 9 / 13;
+		grid-row: 2;
+		margin-top: -7%;
+		justify-self: end;
+		width: 100%;
+	}
+	/* мобайл: фигура → аннотация поверх неё (низ-справа, зона блюдца)
+	   → спутник смещён влево */
+	@media (max-width: 1023.98px) {
+		.capas-note {
+			/* TEAM_041: заметка живёт на фигуре — стрелка смотрит вверх-влево
+			   на слои среза (флип в MiraLasCapas), а не в пустоту под кадром */
+			grid-column: 4 / 11;
+			grid-row: 1;
+			align-self: end;
+			justify-self: end;
+			margin: 0 0.5rem 2.6rem 0;
+			display: flex;
+			align-items: flex-end;
+			gap: 0.6rem;
+			text-align: left;
+		}
+		/* TEAM_029→TEAM_041: флип стрелки на мобайле — внутри MiraLasCapas */
+		.corte-sat {
+			grid-column: 1 / 8;
+			grid-row: 2;
+			margin-top: 1.8rem;
+			justify-self: start;
+		}
+	}
+
+	/* — S05 queso shelf — */
+	.qs-text {
+		max-width: 44ch;
+		margin-inline: auto;
+		text-align: center;
+	}
+	.qs-body { text-wrap: pretty; }
+	.qs-shelf {
+		--qs-w: clamp(9rem, 24vw, 13rem);
+		margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+		display: grid;
+		/* TEAM_044 (Q1-10): entera — широкий кадр (warm 1.245:1),
+		   porción — узкий вертикальный; колонки выставлены так,
+		   чтобы высоты кадров совпадали (~0.63 w) и пара читалась
+		   с одной полки/одного стола. */
+		grid-template-columns: calc(var(--qs-w) * 1.25) calc(var(--qs-w) * 0.78);
+		gap: 0 clamp(1rem, 4vw, 2.5rem);
+		justify-content: center;
+	}
+	.qs-frame {
+		/* TEAM_041: кадры стоят НА линии полки — контактная тень снизу */
+		align-self: end;
+		margin: 0;
+		box-shadow:
+			0 12px 14px -10px rgb(60 42 32 / 0.42),
+			0 3px 5px -3px rgb(60 42 32 / 0.26);
+	}
+	.qs-hair {
+		grid-column: 1 / -1;
+		border: 0;
+		height: 1px;
+		margin: 0;
+		/* TEAM_041: линия-полка тает к краям (перспектива) + тень под ней = глубина */
+		background: linear-gradient(
+			90deg,
+			transparent,
+			color-mix(in srgb, var(--color-muted) 82%, transparent) 12%,
+			color-mix(in srgb, var(--color-muted) 82%, transparent) 88%,
+			transparent
+		);
+		box-shadow: 0 7px 9px -7px rgb(60 42 32 / 0.35);
+	}
+	.qs-cap { text-align: center; margin-top: 0.6rem; }
+
+	/* — S06 la tuya — */
+	.latuya {
+		border-top: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+	}
+	.latuya-grid {
+		display: grid;
+		gap: clamp(2.5rem, 6vw, 5rem);
+		align-items: center;
+		padding-block: clamp(3.5rem, 8vw, 6rem);
+	}
+	@media (min-width: 1024px) {
+		.latuya-grid { grid-template-columns: 6fr 11fr; }
+	}
+	.plate {
+		border: 1px solid color-mix(in srgb, var(--color-muted) 78%, transparent);
+		padding: 0.55rem;
+		max-width: 22rem;
+		/* TEAM_044 (Q1-11): лёгкий полароидный наклон — пластина лежит
+		   на столе, а не висит ровной плашкой; тень смещена вправо. */
+		transform: rotate(-1.6deg);
+		/* TEAM_041: пластина как физический объект на столе — тень-стол */
+		box-shadow:
+			0 16px 26px -14px rgb(60 42 32 / 0.36),
+			6px 5px 10px -4px rgb(60 42 32 / 0.24);
+	}
+	.plate-in {
+		border: 1px dashed color-mix(in srgb, var(--color-muted) 80%, transparent);
+		padding: clamp(2rem, 4.5vw, 2.8rem) clamp(1.4rem, 3vw, 2.4rem);
+		text-align: center;
+	}
+	/* TEAM_044 (Q1-11): контурный эскиз торты — цилиндр с двумя
+	   страта-волнами, карандашный штрих muted-ink. */
+	.plate-sketch {
+		display: block;
+		width: clamp(5rem, 9vw, 6.6rem);
+		height: auto;
+		margin: 0 auto 0.9rem;
+		stroke: var(--color-muted-ink);
+		stroke-width: 1.6;
+		stroke-linecap: round;
+		opacity: 0.8;
+	}
+	.plate-hand {
+		font-family: var(--font-hand);
+		font-weight: 500;
+		font-size: clamp(2.4rem, 5vw, 3.4rem);
+		line-height: 1.05;
+		color: var(--color-ink);
+		transform: rotate(-2deg);
+	}
+	.plate-sub {
+		margin-top: 1.3rem;
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.8rem;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: var(--color-muted-ink);
+	}
+	.la-list {
+		margin-top: 1.6rem;
+		list-style: none;
+		padding: 0;
+		display: grid;
+		gap: 0.85rem;
+	}
+	.la-list li {
+		display: flex;
+		align-items: baseline;
+		gap: 0.7rem;
+	}
+	.la-list li::before {
+		content: "♥";
+		color: var(--color-caramel-ink);
+		font-size: 0.85em;
+		flex: 0 0 auto;
+	}
+	.la-note {
+		margin-top: 1.5rem;
+		font-size: 0.95rem;
+		color: var(--color-muted-ink);
+		max-width: 40ch;
+	}
+
+	/* — S07 cierre — */
+	.cierre { padding-bottom: clamp(3.5rem, 8vw, 5.5rem); }
+	.cierre .filete { margin-top: clamp(2.5rem, 6vw, 4rem); }
+	.cierre-grid {
+		margin-top: clamp(2.2rem, 4vw, 3rem);
+		display: grid;
+		gap: 1.8rem;
+	}
+	@media (min-width: 1024px) {
+		.cierre-grid {
+			grid-template-columns: minmax(0, 4fr) minmax(0, 7fr) auto;
+			gap: clamp(2.5rem, 4vw, 4rem);
+			align-items: center;
+		}
+	}
+	.c-lead {
+		font-style: italic;
+		font-weight: 500;
+		font-size: var(--text-h3);
+		margin-top: 0.9rem;
+	}
+	.c-ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: grid;
+		gap: 0.6rem;
+	}
+	.c-ol li { font-size: 0.95rem; }
+	.c-n {
+		font-family: var(--font-display);
+		font-style: italic;
+		color: var(--color-caramel-ink);
+	}
+	.c-quiet { margin-top: 1.1rem; }
+	.c-cta { margin: 0; }
+
+	/* TEAM_044 (Q2-02): @≤640px межсекционные полосы ~72–88px
+	   (было 110–200px на мобайле). */
+	@media (max-width: 640px) {
+		.carta { padding-block: 2.75rem 2.25rem; }
+		.tarta { padding-block: 2.75rem; }
+		.latuya-grid { padding-block: 2.75rem; }
+		.cierre .filete { margin-top: 2.5rem; }
+		.cierre { padding-bottom: 3.25rem; }
+	}
+</style>

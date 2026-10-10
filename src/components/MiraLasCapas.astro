@@ -1,0 +1,142 @@
+---
+// TEAM_029: «mira las capas» — live annotation for tartas S04 (#barritas).
+// Handwritten Caveat note (HTML text from sections.json, NOT baked into
+// the image) + own hand-drawn SVG flecha-doodle pointing at the cut.
+// Life: on first viewport entry the arrow draws itself via
+// stroke-dashoffset (~0.9s total: line 0.7s, head-flick 0.18s).
+// IntersectionObserver, once. Mount: inside F2's .capas-note grid cell
+// (data-annotation="capas") — placement is owned by the page; this
+// component owns only the note + arrow + draw state.
+// reduced-motion / no-JS → note and fully drawn arrow, no animation.
+// Kill = delete this file + its mount line; no residue.
+interface Props {
+	text: string; // verbatim from sections.json (tartas.s04.hand_note)
+}
+
+const { text } = Astro.props;
+---
+
+<span class="mira" data-mira>
+	<span class="hand-note mira-text">{text}</span>
+	<svg class="mira-arrow" viewBox="0 0 130 270" fill="none" aria-hidden="true" focusable="false">
+		{/* TEAM_044 (Q1-09): длинная S-кривая — остриё падает на нижнюю
+		     кромку лицевого среза (слои), а не на верхнюю корку.
+		     pathLength=100 normalises dash math across paths. */}
+		<path class="mira-line" pathLength="100" d="M114 8 C 122 74, 82 190, 18 252" />
+		<path class="mira-head" pathLength="100" d="M32 242 L 15 253 L 34 258" />
+	</svg>
+</span>
+
+<style>
+	.mira {
+		display: block;
+		pointer-events: none;
+	}
+	.mira-text {
+		display: block;
+		transform: rotate(-3deg);
+		transition:
+			opacity 0.35s ease,
+			transform 0.35s ease;
+	}
+	.mira-arrow {
+		display: block;
+		/* TEAM_044: стрелка вытянута вертикально (130x270) — левый край
+		   SVG = линия прицеливания; margin-left:0 — от левого края текста */
+		width: clamp(3.4rem, 7.5vw, 6.9rem);
+		height: auto;
+		/* -0.9rem смещает остриё левее — точно на нижнюю кромку среза */
+		margin: 0.35rem 0 0 -0.9rem;
+		overflow: visible;
+	}
+	.mira-line,
+	.mira-head {
+		stroke: var(--color-caramel-ink);
+		stroke-width: 1.6;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-dasharray: 100;
+		stroke-dashoffset: 0;
+	}
+
+	/* — armed state (JS only): hidden until .drawn —
+	     :global needed — scoped .js would never match <html> — */
+	:global(.js) .mira:not(.drawn) .mira-text {
+		opacity: 0;
+		transform: rotate(-3deg) translateY(6px);
+	}
+	:global(.js) .mira:not(.drawn) .mira-line,
+	:global(.js) .mira:not(.drawn) .mira-head {
+		stroke-dashoffset: 100;
+	}
+
+	/* — draw: text first, then the line, head last — */
+	.mira.drawn .mira-line {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.7s cubic-bezier(0.5, 0, 0.3, 1) 0.18s;
+	}
+	.mira.drawn .mira-head {
+		stroke-dashoffset: 0;
+		transition: stroke-dashoffset 0.18s ease-out 0.78s;
+	}
+
+	/* — mobile: note sits on the figure's lower-right (page-owned
+	     placement, plate zone); TEAM_041: vertical flip so the tip
+	     points up-left at the cut strata instead of into the void — */
+	@media (max-width: 1023.98px) {
+		.mira {
+			display: flex;
+			align-items: center;
+			gap: 0.7rem;
+			/* TEAM_044: стрелка слева от текста — её длинная кривая не
+			   проходит сквозь надпись (был row: линия резала текст) */
+			flex-direction: row-reverse;
+		}
+		.mira-text {
+			/* TEAM_041: заметка живёт на блюдце фигуры — перенос строк
+			   ронял «mira» на тёмный торт */
+			white-space: nowrap;
+		}
+		.mira-arrow {
+			margin: 0;
+			/* TEAM_044: на мобайле длинная S-кривая слишком высока —
+			   сужаем; флип остаётся: остриё смотрит вверх-влево на срез */
+			width: clamp(2.6rem, 13vw, 4.2rem);
+			transform: scaleY(-1) rotate(-6deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		:global(.js) .mira:not(.drawn) .mira-text {
+			opacity: 1;
+			transform: rotate(-3deg);
+		}
+		:global(.js) .mira:not(.drawn) .mira-line,
+		:global(.js) .mira:not(.drawn) .mira-head {
+			stroke-dashoffset: 0;
+		}
+		.mira.drawn .mira-line,
+		.mira.drawn .mira-head {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	// once-per-page draw trigger; under reduced-motion the hidden state
+	// never applies (CSS above), so skip observing entirely.
+	if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				for (const e of entries) {
+					if (e.isIntersecting) {
+						e.target.classList.add('drawn');
+						io.unobserve(e.target);
+					}
+				}
+			},
+			{ threshold: 0.4 }
+		);
+		for (const el of document.querySelectorAll('[data-mira]')) io.observe(el);
+	}
+</script>

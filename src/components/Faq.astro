@@ -1,0 +1,118 @@
+---
+// TEAM_030: V3 canon — faq S02 «el acordeón — notas». Нативные
+// <details>/<summary>: клавиатура и скринридер из коробки, zero-JS,
+// открытыми могут быть несколько строк. Строка = muted-метка «nota 0N»
+// (из данных) → вопрос Jost 500 → «+» у правого края; открытие: «+»
+// поворачивается 45° в «×», ответ — пометка на полях: Jost italic на
+// подложке --surface с левой кромкой 2px --accent (ред.-решение E1:
+// ответы на Jost, не Caveat — бюджет руки ≤2/стр).
+interface Item {
+	mark: string;
+	q: string;
+	a: string;
+}
+interface Props {
+	items?: Item[];
+	class?: string;
+}
+
+const {
+	items = [],
+	class: cls = '',
+} = Astro.props;
+
+// TEAM_044 (Q1-22): «nota 0N» — настоящие якоря: id слагается из метки,
+// scroll-margin держит их ниже фикс-навбара.
+const slug = (m: string) => m.toLowerCase().replace(/\s+/g, '-');
+---
+
+<div class:list={['faq', cls]}>
+	{items.map((item) => (
+		<details class="faq-item" id={slug(item.mark)}>
+			<summary class="faq-q">
+				<span class="faq-note" aria-hidden="true">{item.mark}</span>
+				<span class="faq-q-text">{item.q}</span>
+				<span class="faq-mark" aria-hidden="true"></span>
+			</summary>
+			<div class="faq-a">
+				<p>{item.a}</p>
+			</div>
+		</details>
+	))}
+</div>
+
+<style>
+	.faq { border-top: 1px solid var(--color-muted); }
+	.faq-item {
+		border-bottom: 1px solid var(--color-muted);
+		/* TEAM_044 (Q1-22): якорь не уходит под фикс-навбар 4.25rem */
+		scroll-margin-top: 5rem;
+	}
+	.faq-q {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: baseline;
+		gap: 1rem;
+		padding: 1.1rem 0.25rem;
+		cursor: pointer;
+		list-style: none;
+	}
+	.faq-q::-webkit-details-marker { display: none; }
+	.faq-note {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.72rem;
+		letter-spacing: 0.16em;
+		color: var(--color-muted-ink);
+		white-space: nowrap;
+	}
+	.faq-q-text {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 1.05rem;
+	}
+	.faq-mark {
+		width: 0.85rem;
+		height: 0.85rem;
+		position: relative;
+		align-self: center;
+		transition: transform 0.3s var(--ease-reveal);
+	}
+	.faq-mark::before,
+	.faq-mark::after {
+		content: "";
+		position: absolute;
+		background: var(--color-caramel);
+	}
+	.faq-mark::before { left: 0; right: 0; top: 45%; height: 1.5px; }
+	.faq-mark::after { top: 0; bottom: 0; left: 45%; width: 1.5px; }
+	/* канон: «+» → «×» поворотом 45° */
+	details[open] .faq-mark { transform: rotate(45deg); }
+	/* TEAM_039: hover-намёк и открытая подсветка — метка «nota 0N»
+	   уходит в caramel-ink, текст вопроса реагирует на наведение. */
+	.faq-q:hover .faq-q-text { color: var(--color-caramel-ink); }
+	details[open] .faq-note { color: var(--color-caramel-ink); }
+	.faq-a {
+		margin: 0 0.25rem 1.3rem;
+		padding: 1rem 1.2rem;
+		background: var(--surface);
+		border-left: 2px solid var(--color-caramel);
+	}
+	.faq-a p {
+		font-family: var(--font-sans);
+		font-style: italic;
+		color: var(--color-ink);
+		margin: 0;
+	}
+	/* раскрытие ~300ms, compositor-only; под reduced-motion — статика */
+	details[open] .faq-a {
+		animation: faq-open 0.3s var(--ease-reveal);
+	}
+	@keyframes faq-open {
+		from { opacity: 0; transform: translateY(-4px); }
+		to { opacity: 1; transform: none; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		details[open] .faq-a { animation: none; }
+	}
+</style>

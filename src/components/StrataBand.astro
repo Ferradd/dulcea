@@ -1,0 +1,82 @@
+---
+// TEAM_029: index S02 «el corte / la firma» — the full-width strata band.
+// A thin strip of the real cut: texture of layers, not the cake itself.
+// Motion: plain [data-reveal] entrance — SITE_SCRIPT orders NO cut
+// animation («срез показан фотографией»); the band appears via the
+// shared «capas apiladas» cascade only. Kill = delete this file + mount.
+import CutPic from './CutPic.astro';
+
+interface Props {
+	alt: string;
+	sizes?: string;
+}
+
+const { alt, sizes = '100vw' } = Astro.props;
+---
+
+<div class="strata-band" data-reveal>
+	<CutPic name="corte-band" alt={alt} sizes={sizes} imgClass="strata-band-img" />
+	{/* TEAM_043 (Q1-02): аннотация слоёв — рукописные маркеры
+	     «obleas»/«nocilla» над лентой с лидерами внутрь среза,
+	     тот же приём что «mira las capas» на tartas:S04. */}
+	<span class="strata-mark strata-mark--obleas" aria-hidden="true">obleas</span>
+	<span class="strata-mark strata-mark--nocilla" aria-hidden="true">nocilla</span>
+</div>
+
+<style>
+	.strata-band {
+		position: relative; /* TEAM_043: якорь для .strata-mark */
+		max-width: 1600px;
+		margin-inline: auto;
+	}
+	/* :global — the <img> lives inside CutPic, scoped attrs don't reach it
+	   (F1's .corte-img selector was dead code for the same reason). */
+	:global(.strata-band-img) {
+		display: block;
+		width: 100%;
+		height: clamp(96px, 17vh, 190px); /* script: узкая полоса ~15–20vh */
+		object-fit: cover;
+		object-position: center;
+	}
+	/* TEAM_043: рукописные маркеры слоёв. Метка висит над кромкой
+	   ленты, тонкий лидер уходит внутрь среза к своему слою —
+	   «obleas» к светлой вафле у верха, «nocilla» к тёмному слою
+	   глубже. */
+	.strata-mark {
+		position: absolute;
+		font-family: var(--font-hand);
+		font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem);
+		line-height: 1;
+		color: var(--color-caramel-ink);
+		white-space: nowrap;
+	}
+	.strata-mark::after {
+		content: "";
+		position: absolute;
+		top: 1em;
+		width: 1.5px;
+		background: color-mix(in srgb, var(--color-caramel-ink) 60%, transparent);
+	}
+	.strata-mark--obleas {
+		left: 16%;
+		top: -1.9rem;
+		transform: rotate(-4deg);
+	}
+	.strata-mark--obleas::after {
+		left: 58%;
+		height: clamp(1.4rem, 3vh, 2.2rem);
+		transform: rotate(10deg);
+		transform-origin: top;
+	}
+	.strata-mark--nocilla {
+		right: 20%;
+		top: -1.7rem;
+		transform: rotate(3deg);
+	}
+	.strata-mark--nocilla::after {
+		left: 30%;
+		height: clamp(2.6rem, 7vh, 4.4rem);
+		transform: rotate(-14deg);
+		transform-origin: top;
+	}
+</style>

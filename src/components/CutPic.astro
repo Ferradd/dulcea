@@ -1,0 +1,52 @@
+---
+// TEAM_027: canonical <picture> for cut/ assets — avif → webp → jpg,
+// explicit width/height (no CLS), alt from caller (sections.json /
+// ASSET_MAP alt_es). Below-fold slots pass loading="lazy"; hero passes
+// fetchpriority="high" + loading="eager".
+import { getCut } from '../lib/cuts';
+
+interface Props {
+	name: string;           // slot base, e.g. "hero-card"
+	alt: string;
+	sizes?: string;         // CSS sizes hint for srcset pick
+	width?: number;         // render width override (keeps AR)
+	class?: string;
+	imgClass?: string;
+	loading?: 'lazy' | 'eager';
+	fetchpriority?: 'high' | 'low' | 'auto';
+	decoding?: 'async' | 'sync' | 'auto';
+}
+
+const {
+	name,
+	alt,
+	sizes,
+	width,
+	class: cls = '',
+	imgClass = '',
+	loading = 'lazy',
+	fetchpriority,
+	decoding = 'async',
+} = Astro.props;
+
+const cut = getCut(name);
+const w = width ?? cut.width;
+const h = Math.round((cut.height / cut.width) * w);
+const toSet = (vs: { url: string; width: number }[]) =>
+	vs.map((v) => `${v.url} ${v.width}w`).join(', ');
+---
+
+<picture class={cls || undefined}>
+	<source type="image/avif" srcset={toSet(cut.avif)} sizes={sizes} />
+	<source type="image/webp" srcset={toSet(cut.webp)} sizes={sizes} />
+	<img
+		src={cut.jpg}
+		alt={alt}
+		width={w}
+		height={h}
+		loading={loading}
+		decoding={decoding}
+		fetchpriority={fetchpriority}
+		class={imgClass || undefined}
+	/>
+</picture>

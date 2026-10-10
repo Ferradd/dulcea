@@ -1,0 +1,279 @@
+---
+// TEAM_030: «el redactor» — canonical DM composer (SITE_SCRIPT como-encargar
+// S02). Papel card meant to sit on the --dark scene. Vanilla JS, zero deps:
+// live preview → «Copiar y abrir Instagram» opens the tab SYNCHRONOUSLY
+// (popup-blocker), then copies; ghost «Copiar mensaje» copies only; plain
+// link «abrir Instagram ↗» is the third path. ?tarta=<slug> deep-links
+// preselect via client-side URLSearchParams (static build). Clipboard →
+// execCommand → select-the-text fallbacks. No-JS: static canonical example,
+// buttons hidden.
+import site from '../data/sections.json';
+
+const rd = site['como-encargar'].s02.composer;
+const ig = site.global.brand.instagram;
+const example = `Hola 👋 Quiero encargar ${rd.options[0].fill} para el día __. Soy __. ¿Me cuentas precio y opciones? ¡Gracias!`;
+const [nsPre, nsPost] = rd.noscript.split('@dulcea.cake');
+---
+
+<div class="redactor" data-redactor data-ig={ig} data-tpl={rd.template}>
+	<h3 class="rd-title">{rd.title}</h3>
+
+	<form class="rd-form" onsubmit="return false">
+		<label class="rd-field">
+			<span class="rd-label">{rd.fields.tarta}</span>
+			<select class="rd-input" data-rd-cake>
+				{rd.options.map((o) => (
+					<option value={o.slug} data-fill={o.fill}>{o.label}</option>) 
+				)}
+			</select>
+		</label>
+		<div class="rd-row">
+			<label class="rd-field">
+				<span class="rd-label">{rd.fields.dia}</span>
+				<input class="rd-input" type="date" data-rd-date />
+			</label>
+			<label class="rd-field">
+				<span class="rd-label">{rd.fields.nombre}</span>
+				<input class="rd-input" type="text" data-rd-name placeholder="Marta" autocomplete="given-name" />
+			</label>
+		</div>
+	</form>
+
+	<div class="rd-preview-wrap">
+		<span class="rd-label">{rd.fields.mensaje}</span>
+		<p class="rd-preview hand-note" data-rd-preview aria-live="polite">{example}</p>
+	</div>
+
+	<div class="rd-actions">
+		<button type="button" class="btn rd-go" data-rd-go>
+			<span data-rd-go-label>{rd.buttons.primary}</span>
+		</button>
+		<button type="button" class="btn btn--ghost" data-rd-copy>
+			<span data-rd-copy-label>{rd.buttons.ghost}</span>
+		</button>
+		<a class="rd-link" href={ig} target="_blank" rel="noopener">{rd.buttons.quiet}</a>
+	</div>
+
+	<noscript>
+		<p class="rd-noscript">
+			{nsPre}<a href={ig} target="_blank" rel="noopener">@dulcea.cake</a>{nsPost}
+		</p>
+	</noscript>
+</div>
+
+<style>
+	.redactor {
+		width: 100%;
+		max-width: 30rem;
+		min-width: 0; /* TEAM_012 lesson: keep the select from forcing overflow */
+		background-color: var(--surface);
+		/* TEAM_038: papel-фактура (зерно ~5%) + светлая кромка-блик —
+		   карточка-бланк лежит на тёмном столе, а не плашка. */
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.235 0 0 0 0 0.165 0 0 0 0 0.125 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+		color: var(--color-ink); /* card sits on --dark scene — re-anchor ink */
+		border: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		border-radius: var(--radius-card);
+		box-shadow:
+			inset 0 1px 0 rgb(255 252 246 / 0.7),
+			0 2px 3px rgb(0 0 0 / 0.2),
+			0 28px 52px -20px rgb(0 0 0 / 0.5);
+		padding: clamp(1.4rem, 3vw, 2rem);
+	}
+	.rd-title {
+		font-family: var(--font-display);
+		font-weight: 560;
+		font-size: var(--text-h3);
+		/* TEAM_038: hairline под заголовком — карточка читается как бланк */
+		padding-bottom: 0.85rem;
+		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+	}
+	.rd-form { margin-top: 1.3rem; display: grid; gap: 0.9rem; }
+	.rd-row { display: grid; gap: 0.9rem; grid-template-columns: 1fr 1fr; }
+	@media (max-width: 400px) {
+		.rd-row { grid-template-columns: 1fr; }
+	}
+	.rd-field { display: grid; gap: 0.35rem; min-width: 0; }
+	.rd-label {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.7rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--color-muted-ink);
+	}
+	.rd-input {
+		font: inherit;
+		font-size: 0.95rem;
+		padding: 0.6em 0.9em;
+		/* TEAM_038: поля бланка в палитре — волосяная muted-ink рамка,
+		   cream-фон, карамельное кольцо фокуса вместо дефолта. */
+		border: 1px solid color-mix(in srgb, var(--color-muted-ink) 45%, transparent);
+		border-radius: 4px;
+		background: var(--bg);
+		color: var(--color-ink);
+		width: 100%;
+		min-width: 0;
+		transition: border-color 0.2s var(--ease-reveal), box-shadow 0.2s var(--ease-reveal);
+	}
+	.rd-input:focus-visible {
+		outline: none;
+		border-color: var(--color-caramel-ink);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-caramel) 32%, transparent);
+	}
+	/* TEAM_038: select без системной стрелки — свой шеврон в карамели. */
+	select.rd-input {
+		appearance: none;
+		padding-right: 2.5em;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238A5330' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: right 0.85em center;
+	}
+	input[type="date"].rd-input::-webkit-calendar-picker-indicator { opacity: 0.55; }
+	.rd-preview-wrap { margin-top: 1.3rem; display: grid; gap: 0.5rem; }
+	.rd-preview {
+		/* TEAM_038: «черновик» — лист из блокнота: поле-кромка слева,
+		   пунктирная рамка, лёгкий наклон, рука Caveat. */
+		background-color: color-mix(in srgb, var(--bg) 80%, var(--surface));
+		background-image: linear-gradient(
+			90deg,
+			transparent 0,
+			transparent 2rem,
+			color-mix(in srgb, var(--color-berry) 20%, transparent) 2rem,
+			transparent calc(2rem + 1px)
+		);
+		border: 1px dashed var(--color-muted);
+		border-radius: 4px;
+		padding: 0.9rem 1.1rem 0.9rem 2.6rem;
+		font-size: clamp(1.2rem, 1.05rem + 0.7vw, 1.45rem);
+		min-height: 4.2em;
+		white-space: pre-wrap;
+		transform: rotate(-0.8deg); /* papel motive: the note is «handwritten» */
+	}
+	.rd-actions {
+		margin-top: 1.4rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+	.rd-link {
+		/* TEAM_045 Q2-01: hit-area 44px; underline → text-decoration. */
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: var(--color-caramel-ink);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+	.rd-link:hover { color: var(--color-berry); }
+
+	.rd-noscript { margin-top: 1rem; font-size: 0.9rem; color: var(--color-muted-ink); }
+	.rd-noscript a { color: var(--color-caramel-ink); }
+
+	/* No-JS: static example + link carry the flow, actions hide. */
+	:global(html:not(.js)) .rd-actions { display: none; }
+	:global(html:not(.js)) .rd-preview { display: none; }
+	:global(html:not(.js)) .rd-form { display: none; }
+</style>
+
+<script>
+	// TEAM_030: the ONE live mechanic of /como-encargar/ — compose the
+	// canonical DM from the script template, copy it, open Instagram.
+	document.querySelectorAll('[data-redactor]').forEach((root) => {
+		const cake = root.querySelector('[data-rd-cake]') as HTMLSelectElement;
+		const date = root.querySelector('[data-rd-date]') as HTMLInputElement;
+		const name = root.querySelector('[data-rd-name]') as HTMLInputElement;
+		const preview = root.querySelector('[data-rd-preview]') as HTMLElement;
+		const go = root.querySelector('[data-rd-go]') as HTMLButtonElement;
+		const goLabel = root.querySelector('[data-rd-go-label]') as HTMLElement;
+		const copy = root.querySelector('[data-rd-copy]') as HTMLButtonElement;
+		const copyLabel = root.querySelector('[data-rd-copy-label]') as HTMLElement;
+		const ig = root.getAttribute('data-ig')!;
+		const tpl = root.getAttribute('data-tpl')!;
+
+		// Deep-link «La quiero → ?tarta=<slug>» from /tartas/ — preselect +
+		// scroll to the redactor.
+		const wanted = new URLSearchParams(location.search).get('tarta');
+		if (wanted && [...cake.options].some((o) => o.value === wanted)) {
+			cake.value = wanted;
+			requestAnimationFrame(() =>
+				root.scrollIntoView({ block: 'center' })
+			);
+		}
+
+		const fmtDate = (iso: string) => {
+			if (!iso) return '__';
+			const [y, m, d] = iso.split('-');
+			return `${d}/${m}/${y}`;
+		};
+		const fill = () =>
+			cake.options[cake.selectedIndex]?.dataset.fill ?? 'una tarta';
+		const compose = () =>
+			tpl
+				.replace('<tarta>', fill())
+				.replace('<dd/mm/yyyy>', fmtDate(date.value))
+				.replace('<nombre>', name.value.trim() || '__');
+
+		const render = () => (preview.textContent = compose());
+		[cake, date, name].forEach((el) => el.addEventListener('input', render));
+		render();
+
+		const copyText = async (text: string) => {
+			try {
+				await navigator.clipboard.writeText(text);
+				return true;
+			} catch { /* secure-context/permission miss — fall through */ }
+			try {
+				const ta = document.createElement('textarea');
+				ta.value = text;
+				ta.setAttribute('readonly', '');
+				ta.style.position = 'fixed';
+				ta.style.opacity = '0';
+				document.body.appendChild(ta);
+				ta.select();
+				const ok = document.execCommand('copy');
+				ta.remove();
+				return ok;
+			} catch {
+				return false;
+			}
+		};
+		const selectPreview = () => {
+			const sel = getSelection();
+			const range = document.createRange();
+			range.selectNodeContents(preview);
+			sel?.removeAllRanges();
+			sel?.addRange(range);
+		};
+		const flash = (el: HTMLElement, msg: string) => {
+			const prev = el.textContent;
+			el.textContent = msg;
+			setTimeout(() => (el.textContent = prev), 2500);
+		};
+
+		copy.addEventListener('click', async () => {
+			const ok = await copyText(compose());
+			if (ok) flash(copyLabel, 'Copiado ✓');
+			else {
+				selectPreview();
+				flash(copyLabel, 'Cópialo de arriba ↑');
+			}
+		});
+
+		go.addEventListener('click', () => {
+			const text = compose();
+			// Open FIRST, synchronously — awaiting the clipboard spends the
+			// user gesture and popup blockers would kill the tab.
+			window.open(ig, '_blank', 'noopener');
+			copyText(text).then((ok) => {
+				if (ok) flash(goLabel, 'Mensaje copiado ✓');
+				else {
+					selectPreview();
+					flash(goLabel, 'Cópialo de arriba ↑');
+				}
+			});
+		});
+	});
+</script>

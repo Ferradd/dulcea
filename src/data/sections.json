@@ -1,0 +1,416 @@
+{
+  "global": {
+    "brand": {
+      "wordmark": "dulcea",
+      "descriptor": "tartas artesanales",
+      "instagram": "https://instagram.com/dulcea.cake",
+      "handle": "@dulcea.cake"
+    },
+    "header": {
+      "nav": [
+        { "label": "Tartas", "href": "/tartas/" },
+        { "label": "La pastelera", "href": "/sobre/" },
+        { "label": "Cómo encargar", "href": "/como-encargar/" },
+        { "label": "Contacto", "href": "/contacto/" },
+        { "label": "Preguntas", "href": "/faq/" }
+      ],
+      "cta": { "label": "Pedir por DM", "href": "/como-encargar/" },
+      "menu_aria": "Menú"
+    },
+    "footer": {
+      "line": "tartas artesanales · Cartagena, Murcia",
+      "channel": "Pedidos por DM · @dulcea.cake",
+      "copyright": "© 2026 dulcea"
+    },
+    "skip_link": "Saltar al contenido",
+    "chips": ["Hecha por encargo", "Cartagena, Murcia", "Recogida en punto acordado", "Pedidos por DM"]
+  },
+  "index": {
+    "meta": {
+      "title": "Tartas artesanales en Cartagena · dulcea",
+      "description": "Tartas de obleas y tarta de queso por encargo en Cartagena. Las horneo yo misma — pide la tuya por DM."
+    },
+    "s01": {
+      "eyebrow": "Cartagena, Murcia · tartas artesanales",
+      "h1": "La felicidad,",
+      "emphasis": "capa a capa.",
+      "lede": "Tartas artesanales de obleas y de queso, hechas para ti en Cartagena. Para celebrar algo grande… o darte un pequeño capricho.",
+      "cta_primary": { "label": "Ver las tartas", "href": "/tartas/" },
+      "cta_secondary": { "label": "Pedir por DM", "href": "https://instagram.com/dulcea.cake" },
+      "img_alt": "Tarta de obleas con Nocilla entera y una porción ya cortada delante"
+    },
+    "s02": {
+      "eyebrow": "la firma",
+      "h2": "El corte es la prueba",
+      "body": "Por fuera parece una tarta más. Por dentro son decenas de capas finas de oblea con Nocilla, una encima de otra. Por eso siempre enseño el corte: es la parte que no se puede fingir.",
+      "caption": "El corte de la de Nocilla y barritas de cereales, en mi cocina.",
+      "img_alt": "Corte de la tarta de obleas: decenas de capas finas con Nocilla"
+    },
+    "s03": {
+      "eyebrow": "los sabores",
+      "h2": "¿De cuál te guardo un trocito?",
+      "cards": [
+        {
+          "title": "Obleas con Nocilla y barritas de cereales",
+          "text": "Capas crujientes de oblea, Nocilla y el toque de las barritas de cereales de leche.",
+          "href": "/tartas/#barritas",
+          "img_alt": "Obleas con Nocilla y barritas de cereales"
+        },
+        {
+          "title": "Obleas con Filipinos",
+          "text": "Las mismas capas, cubierta de chocolate y trocitos de Filipinos encima. Crujiente y cremosa.",
+          "href": "/tartas/#filipinos",
+          "img_alt": "Obleas con Filipinos"
+        }
+      ],
+      "tile": {
+        "title": "Tarta de queso",
+        "text": "Cremosa por dentro, doradita por encima. Sencilla, suave y para repetir.",
+        "href": "/tartas/#queso"
+      },
+      "link": { "label": "Ver todas las tartas →", "href": "/tartas/" }
+    },
+    "s04": {
+      "eyebrow": "en el obrador",
+      "h2": "Esto pasa en mi cocina",
+      "body": "Sin focos ni pose: la placa de mi cocina, el molde desmontable y una tarta de queso dorándose. Es el mismo reel que subí a Instagram.",
+      "quote": "“Así quedó por dentro 😍” — @dulcea.cake",
+      "video_label": "Masa de tarta de queso en el molde, lista para el horno",
+      "poster_alt": "Masa de tarta de queso en el molde, lista para el horno"
+    },
+    "s05": {
+      "eyebrow": "la segunda de la casa",
+      "h2": "La de queso",
+      "body": "Cremosa por dentro, doradita por encima. Es la más sencilla que hago. Un bocado y querrás otra porción.",
+      "caption": "Una porción de la de queso, en mi cocina.",
+      "img_alt": "Porción de tarta de queso con su superficie dorada sobre una mesa de madera"
+    },
+    "s06": {
+      "eyebrow": "encargos",
+      "h2": "Tu porción te está esperando",
+      "steps": [
+        "Escríbeme por DM con la fecha y la idea.",
+        "Hablamos de sabor, tamaño y diseño.",
+        "La recoges en el punto que acordemos — Cartagena y alrededores."
+      ],
+      "cta": { "label": "Pedir por DM en Instagram", "href": "https://instagram.com/dulcea.cake" },
+      "quiet_link": { "label": "Ver cómo encargar paso a paso →", "href": "/como-encargar/" },
+      "img_alt": "Porción de tarta de obleas con Filipinos sobre una servilleta, la tarta entera al fondo"
+    }
+  },
+  "tartas": {
+    "meta": {
+      "title": "Tartas · la carta — Cartagena",
+      "description": "Cuatro tartas de la casa y la tuya a tu manera: obleas con Nocilla, Filipinos, barritas y tarta de queso. Encargos por DM, Cartagena."
+    },
+    "s01": {
+      "eyebrow": "LA CARTA · CARTAGENA",
+      "h1": "Tartas",
+      "lede": "Cuatro tartas hay en la carta — cada una con su corte a la vista, como en mis posts: primero entera, luego por dentro. La quinta es la tuya: me la cuentas por DM y la diseñamos juntas.",
+      "rail": [
+        { "label": "Nocilla", "href": "#nocilla" },
+        { "label": "Filipinos", "href": "#filipinos" },
+        { "label": "Barritas", "href": "#barritas" },
+        { "label": "De queso", "href": "#queso" },
+        { "label": "La tuya", "href": "#la-tuya" }
+      ]
+    },
+    "s02": {
+      "id": "nocilla",
+      "eyebrow": "TARTA · OBLEAS CON NOCILLA",
+      "h2": "Obleas con Nocilla",
+      "sensory": "Crujiente, cremosa y adictiva.",
+      "composition": "Obleas finas rellenas de deliciosa Nocilla y recubierta con trocitos de cereales de chocolate.",
+      "cta": { "label": "La quiero →", "href": "/como-encargar/?tarta=obleas-nocilla" },
+      "caption": "La de Nocilla: entera y con su porción ya cortada.",
+      "img_alt_main": "Tarta de obleas con Nocilla entera y una porción ya cortada delante",
+      "img_alt_second": "Tarta entera de obleas con Nocilla y cobertura de chocolate"
+    },
+    "s03": {
+      "id": "filipinos",
+      "eyebrow": "TARTA · OBLEAS CON FILIPINOS",
+      "h2": "Obleas con Filipinos",
+      "sensory": "Crujiente, cremosa e irresistible.",
+      "composition": "Capas y capas de oblea con crema de chocolate, cubierta de chocolate y coronada con trocitos de Filipinos. Sí, los de siempre.",
+      "cta": { "label": "La quiero →", "href": "/como-encargar/?tarta=obleas-filipinos" },
+      "caption": "Entera y por dentro — así quedan los Filipinos.",
+      "img_alt_entera": "Tarta de obleas con Filipinos entera sobre la encimera",
+      "img_alt_porcion": "Porción de tarta de obleas con Filipinos sobre una servilleta, la tarta entera al fondo"
+    },
+    "s04": {
+      "id": "barritas",
+      "eyebrow": "TARTA · OBLEAS CON NOCILLA Y BARRITAS",
+      "h2": "Obleas con Nocilla y barritas de cereales",
+      "sensory": "Crujiente, cremosa… y con un cerco que también se come.",
+      "composition": "Capas crujientes de oblea, Nocilla cremosa y el toque especial de las barritas de cereales de leche. Es la del corte: decenas de capas que se ven de verdad al partirla.",
+      "hand_note": "mira las capas",
+      "cta": { "label": "La quiero →", "href": "/como-encargar/?tarta=obleas-barritas" },
+      "img_alt_figura": "Corte de la tarta de obleas: decenas de capas finas con Nocilla",
+      "img_alt_satelite": "Obleas con Nocilla y barritas de cereales"
+    },
+    "s05": {
+      "id": "queso",
+      "eyebrow": "TARTA · DE QUESO",
+      "h2": "Tarta de queso",
+      "sensory": "Cremosa, suave y con ese toque doradito.",
+      "body": "La más sencilla de la carta: horneada hasta el dorado, sin capas — aquí la prueba está en la textura. Un bocado y querrás repetir.",
+      "captions": ["entera", "la porción"],
+      "cta": { "label": "La quiero →", "href": "/como-encargar/?tarta=queso" },
+      "img_alt_entera": "Tarta de queso, entera",
+      "img_alt_porcion": "Tarta de queso, la porción"
+    },
+    "s06": {
+      "id": "la-tuya",
+      "plate_script": "La tuya",
+      "plate_descriptor": "diseño personalizado",
+      "eyebrow": "ENCARGO · PERSONALIZADA",
+      "h2": "La tuya, a tu manera",
+      "bullets": [
+        "El sabor que te apetece — como la de Kinder Bueno del sorteo.",
+        "La decoración y el mensaje que quieras poner.",
+        "La fecha y el punto de recogida que te vengan bien."
+      ],
+      "note": "Los sabores disponibles los confirmo por DM — cuéntame qué te apetece.",
+      "cta": { "label": "La quiero →", "href": "/como-encargar/?tarta=personalizada" }
+    },
+    "s07": {
+      "eyebrow": "ENCARGO · CÓMO FUNCIONA",
+      "lead": "Tres pasos y tienes tarta:",
+      "steps": [
+        "Eliges la tarta — aquí o en la página de encargo.",
+        "Me escribes por DM — la página te redacta el mensaje sola.",
+        "La recoges en el punto que acordemos, en Cartagena y alrededores."
+      ],
+      "quiet": "Sabor, tamaño, fecha y precio se acuerdan por DM.",
+      "cta": { "label": "Cómo encargar paso a paso →", "href": "/como-encargar/" }
+    }
+  },
+  "sobre": {
+    "meta": {
+      "title": "La pastelera — quién hornea las tartas",
+      "description": "Tartas artesanales por encargo en Cartagena: quién está detrás de dulcea, cómo trabajo y cómo pedir la tuya."
+    },
+    "s01": {
+      "eyebrow": "quién hornea",
+      "h1": "La pastelera",
+      "paragraphs": [
+        "Hola. Soy quien hornea las tartas de dulcea — un pequeño proyecto dulce que acaba de nacer en Cartagena.",
+        "Horneo por encargo, en mi cocina: tartas de obleas, tarta de queso y diseños personalizados. No hay tienda ni vitrina — me escribes por DM, hablamos de tu tarta y se hornea para ti.",
+        "Las fotos de las tartas son mías."
+      ],
+      "photo_caption": "mi mesa de trabajo",
+      "img_alt": "Masa de tarta de queso en un molde desmontable, sobre la placa de cocina"
+    },
+    "s02": {
+      "headline": "Mi cocina, tal cual.",
+      "intro": "Estos fotogramas son de verdad — de la mezcla a la mesa.",
+      "frames": [
+        { "mark": "fotograma 1/3", "caption": "La mezcla, antes del horno.", "img_alt": "La mezcla, antes del horno" },
+        { "mark": "fotograma 2/3", "caption": "Recién salida, con su toque doradito.", "img_alt": "Recién salida, con su toque doradito" },
+        { "mark": "detalle 3/3", "caption": "Y por dentro, una porción para ti.", "img_alt": "Porción de tarta de queso sobre una mesa de madera" }
+      ]
+    },
+    "s03": {
+      "eyebrow": "la carta corta",
+      "h2": "Lo que horneo",
+      "items": [
+        { "name": "TARTA DE OBLEAS", "text": "capas crujientes de oblea con Nocilla, Filipinos o barritas de cereales de leche." },
+        { "name": "TARTA DE QUESO", "text": "cremosa, suave y con ese toque doradito por encima." },
+        { "name": "TARTA PERSONALIZADA", "text": "me cuentas la ocasión y la idea, y la hago." }
+      ],
+      "outro": "La carta completa está en la página de tartas — y si echas algo en falta, lo hablamos por DM.",
+      "img_alt": "Porción de tarta de obleas con Filipinos sobre una servilleta, la tarta entera al fondo"
+    },
+    "s04": {
+      "eyebrow": "cómo trabajo",
+      "h2": "Cada tarta, para alguien",
+      "paragraph": "Trabajo por encargo: no hay tartas esperando en una vitrina. Cada una se hornea para una persona concreta, con su fecha y su idea. Todo se habla por mensaje: la tarta, el precio, la fecha y la recogida.",
+      "chips": ["Hecha por encargo", "Cartagena, Murcia", "Recogida en punto acordado", "Pedidos por DM"],
+      "signature": "— la pastelera"
+    },
+    "s05": {
+      "line": "Este proyecto tiene días, no años — y por eso cada encargo me importa tanto.",
+      "cta": { "label": "Escríbeme por DM →", "href": "https://instagram.com/dulcea.cake" },
+      "quiet": { "label": "o mira las tartas →", "href": "/tartas/" }
+    }
+  },
+  "como-encargar": {
+    "meta": {
+      "title": "Cómo encargar · tartas artesanales en Cartagena",
+      "description": "Sin carrito ni tienda online: me escribes por DM en Instagram, yo horneo tu tarta y la recoges en Cartagena. Aquí tienes el redactor que te prepara el mensaje."
+    },
+    "s00": {
+      "eyebrow": "Pedidos por DM",
+      "h1": "Cómo encargar",
+      "lede": "Aquí no hay carrito ni tienda online: cada tarta se encarga por mensaje directo en Instagram, persona a persona. Funciona en tres pasos — y el primero casi te lo hago yo.",
+      "img_alt": "Tarta de queso entera, recién hecha, sobre un fondo claro"
+    },
+    "s01": {
+      "h2": "Así funciona",
+      "steps": [
+        {
+          "mark": "paso 1 · desde tu móvil",
+          "h3": "Me escribes",
+          "text": "Un DM en Instagram con tu idea: qué tarta, para cuándo y para cuántas personas. No hace falta tenerlo claro del todo — lo vemos juntas."
+        },
+        {
+          "mark": "paso 2 · en mi cocina",
+          "h3": "Yo horneo",
+          "text": "Hablamos, cerramos los detalles y horneo tu tarta para ti, en mi cocina de Cartagena.",
+          "img_alt": "Masa de tarta de queso en el molde, lista para el horno"
+        },
+        {
+          "mark": "paso 3 · en Cartagena",
+          "h3": "La recoges",
+          "text": "Quedamos en un punto que nos venga bien a las dos y te llevas tu tarta recién hecha.",
+          "img_alt": "Tarta de obleas con Nocilla entera y una porción ya cortada delante"
+        }
+      ],
+      "note": "¿Cuánto tarda? Depende de tu fecha — cuéntamela cuanto antes por DM y lo vemos."
+    },
+    "s02": {
+      "eyebrow": "El atajo",
+      "h2": "El mensaje lo escribo yo",
+      "lede": "Rellena tres campos y el redactor te compone el DM exacto. Solo tienes que pegarlo y enviarlo.",
+      "what_to_tell": [
+        "la fecha para la que la quieres",
+        "el sabor o la idea que te apetece — el desplegable cubre las cuatro de la casa, y la personalizada la pensamos juntas",
+        "para cuántas personas es y la ocasión — eso lo vemos por DM",
+        "si tienes fotos o referencias, adjúntalas en el mismo DM"
+      ],
+      "hand_note": "todo por DM, persona a persona",
+      "composer": {
+        "title": "Escribe tu pedido",
+        "fields": {
+          "tarta": "La tarta",
+          "dia": "Para el día",
+          "nombre": "Tu nombre",
+          "mensaje": "Tu mensaje"
+        },
+        "buttons": {
+          "primary": "Copiar y abrir Instagram",
+          "ghost": "Copiar mensaje",
+          "quiet": "abrir Instagram ↗"
+        },
+        "status": {
+          "copied_open": "Mensaje copiado ✓",
+          "copied": "Copiado ✓",
+          "select_above": "Cópialo de arriba ↑"
+        },
+        "template": "Hola 👋 Quiero encargar <tarta> para el día <dd/mm/yyyy>. Soy <nombre>. ¿Me cuentas precio y opciones? ¡Gracias!",
+        "noscript": "Sin JavaScript: copia este texto y envíalo por DM a @dulcea.cake — \"Hola 👋 Quiero encargar una tarta de obleas con Nocilla para el día __. Soy __. ¿Me cuentas precio y opciones? ¡Gracias!\"",
+        "options": [
+          { "slug": "obleas-nocilla", "label": "Obleas con Nocilla", "fill": "una tarta de obleas con Nocilla" },
+          { "slug": "obleas-filipinos", "label": "Obleas con Filipinos", "fill": "una tarta de obleas con Filipinos" },
+          { "slug": "obleas-barritas", "label": "Obleas con Nocilla y barritas de cereales", "fill": "una tarta de obleas con Nocilla y barritas de cereales" },
+          { "slug": "queso", "label": "Tarta de queso", "fill": "una tarta de queso" },
+          { "slug": "personalizada", "label": "Personalizada", "fill": "una tarta personalizada" }
+        ]
+      }
+    },
+    "s03": {
+      "h2": "Y después",
+      "body": "Le das a enviar — y hablamos. La fecha, el punto de recogida en Cartagena y el precio se cierran contigo por DM: cada tarta se presupuesta en la conversación, sin letra pequeña.",
+      "chips": ["Hecha por encargo", "Cartagena, Murcia", "Recogida en punto acordado", "Pedidos por DM"],
+      "exits": [
+        { "label": "¿Dudas? Las preguntas →", "href": "/faq/" },
+        { "label": "¿Otra tarta? La carta →", "href": "/tartas/" }
+      ]
+    }
+  },
+  "contacto": {
+    "meta": {
+      "title": "Contacto · tartas artesanales en Cartagena",
+      "description": "El canal real es el DM de Instagram: ahí leo todo y contesto yo. Escríbeme por una tarta, una fecha o cualquier duda."
+    },
+    "s00": {
+      "eyebrow": "Contacto",
+      "h1": "Escríbeme",
+      "lede": "La forma más directa de hablar conmigo es el DM de Instagram: ahí leo todo y contesto yo. Cuéntame qué tienes en mente — una tarta, una fecha o cualquier duda."
+    },
+    "s01": {
+      "composer": {
+        "title": "Escríbeme por DM",
+        "lede": "Elige, pon tu nombre y la fecha — el mensaje se compone solo. Luego lo pegas en el DM."
+      },
+      "rail": [
+        {
+          "title": "Instagram",
+          "text": "¿Una duda que no es pedido? Escríbeme igual — @dulcea.cake ↗",
+          "href": "https://instagram.com/dulcea.cake"
+        },
+        {
+          "title": "WhatsApp",
+          "text": "Todavía no tengo número público de WhatsApp. Si te viene mejor este canal, dímelo por DM y lo vemos.",
+          "link": { "label": "avisarme por DM →", "href": "https://instagram.com/dulcea.cake" }
+        },
+        {
+          "title": "Datos rápidos",
+          "chips": ["Hecha por encargo", "Cartagena, Murcia", "Recogida en punto acordado", "Contesto por DM"]
+        }
+      ],
+      "photo_caption": "de mi cocina, recién salida",
+      "img_alt": "de mi cocina, recién salida"
+    },
+    "s02": {
+      "h2": "¿Lo prefieres por escrito?",
+      "explain": "Esta nota todavía está en modo de prueba: lo que escribas aquí no sale de tu navegador. El canal real hoy es el DM de Instagram — arriba tienes el redactor que te lo prepara. Cuando active el envío, esta misma nota me llegará directamente.",
+      "labels": { "nombre": "Tu nombre", "dia": "¿Para qué día?", "mensaje": "Tu mensaje" },
+      "placeholder": "Qué tarta te apetece, para cuántos, la ocasión…",
+      "button": "Enviar",
+      "status": {
+        "sending": "Enviando…",
+        "sent": "¡Enviado! Te contesto lo antes posible.",
+        "prueba": "Modo de prueba: el mensaje no sale de tu navegador. Escríbeme por DM a @dulcea.cake — el redactor de arriba te lo prepara.",
+        "fail": "No ha salido el envío — mientras tanto, escríbeme por DM a @dulcea.cake."
+      },
+      "note_prueba": "Este formulario está en modo de prueba: lo que escribas no se envía a ningún sitio. El canal real hoy es el DM de Instagram.",
+      "note_live": "Este formulario me llega directo. Si prefieres, el DM de arriba va al mismo sitio.",
+      "noscript": "Sin JavaScript este formulario no envía — escríbeme por DM a @dulcea.cake."
+    },
+    "s03": {
+      "voice": "contesto yo, persona a persona",
+      "links": [
+        { "label": "Ver las tartas →", "href": "/tartas/" },
+        { "label": "Cómo encargar →", "href": "/como-encargar/" },
+        { "label": "Preguntas frecuentes →", "href": "/faq/" }
+      ]
+    }
+  },
+  "faq": {
+    "meta": {
+      "title": "Preguntas frecuentes — pedidos, precio y recogida",
+      "description": "Las dudas que llegan por DM: cómo encargar, precio, antelación, recogida en Cartagena, alérgenos y tartas personalizadas."
+    },
+    "s01": {
+      "eyebrow": "antes de encargar",
+      "h1": "Preguntas frecuentes",
+      "intro": "Las dudas que me llegan por DM, respondidas corto y sin rodeos. Si falta la tuya, escríbeme.",
+      "chips": ["Pedidos por DM", "Cartagena, Murcia", "Cada tarta por encargo"],
+      "photo_caption": "contesto yo misma",
+      "img_alt": "Porción de tarta de obleas con Filipinos sobre una servilleta"
+    },
+    "s02": {
+      "notas": [
+        { "mark": "nota 01", "q": "¿Cómo encargo una tarta?", "a": "Por DM en Instagram (@dulcea.cake): me dices qué tarta, para cuándo y para cuántas personas, y lo vemos juntas. En \"Cómo encargar\" tienes el redactor — el mensaje queda listo para copiar." },
+        { "mark": "nota 02", "q": "¿Cuánto cuesta una tarta?", "a": "Depende del tamaño y del diseño — por eso cada tarta se presupuesta por DM. Me cuentas la idea y te digo precio sin compromiso." },
+        { "mark": "nota 03", "q": "¿Con cuánta antelación tengo que pedir?", "a": "Cuanto antes, mejor: cada tarta se hornea por encargo. Dime tu fecha por DM y te digo si llego — si va justa de tiempo, lo hablamos." },
+        { "mark": "nota 04", "q": "¿Dónde se recoge? ¿Hay envío?", "a": "La recogida es en Cartagena, en el punto que acordemos por mensaje. Si necesitas que llegue a otro sitio, pregúntame y lo vemos." },
+        { "mark": "nota 05", "q": "¿Y si tengo una alergia o intolerancia?", "a": "Todavía no tengo publicada la lista de alérgenos de cada tarta. Dímelo en el primer mensaje y lo miramos antes de encargar nada — prefiero la pregunta de más." },
+        { "mark": "nota 06", "q": "¿Haces tartas personalizadas?", "a": "Sí — es de lo que más me gusta. Cuéntame la ocasión y la idea por DM, y la preparo." },
+        { "mark": "nota 07", "q": "¿Qué sabores hay?", "a": "Las del momento están en la página de tartas: obleas con Nocilla, con Filipinos, con Nocilla y barritas de cereales y tarta de queso. Si buscas otro sabor, pregúntame — la carta va creciendo." }
+      ],
+      "aside": {
+        "title": "¿No está tu pregunta?",
+        "cta": { "label": "Escríbeme por DM →", "href": "https://instagram.com/dulcea.cake" },
+        "photo_caption": "una de las del momento",
+        "img_alt": "una de las del momento"
+      }
+    },
+    "s03": {
+      "line": "Si tu duda no está aquí, escríbeme — contesto yo misma.",
+      "cta": { "label": "Escríbeme por DM →", "href": "https://instagram.com/dulcea.cake" },
+      "quiet": { "label": "o déjamela por escrito en contacto →", "href": "/contacto/" }
+    }
+  }
+}

@@ -1,0 +1,281 @@
+body.bakery[data-page] {
+  --color-cream: #fffaf2;
+  --color-surface: #f3e7d7;
+  --color-ink: #43291f;
+  --color-caramel: #a94e36;
+  --color-caramel-ink: #8b3f2d;
+  --color-berry: #713120;
+  --color-muted: #cfb7a0;
+  --color-muted-ink: #735d4f;
+  --color-muted-light: #ebd6bc;
+  --color-choco: #422c24;
+  --radius-card: 16px;
+  --bg: var(--color-cream);
+  --surface: var(--color-surface);
+  --text: var(--color-ink);
+  --accent: var(--color-caramel);
+  --accent-2: var(--color-berry);
+  --muted: var(--color-muted);
+  --dark: var(--color-choco);
+  --paper: #fffdf8;
+  --gingham: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath fill='%2399563810' d='M0 0h20v40H0zM0 0h40v20H0z'/%3E%3C/svg%3E");
+  --stitch: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='12' viewBox='0 0 48 12'%3E%3Cpath d='M0 2Q12 18 24 2Q36 18 48 2' fill='none' stroke='%23a94e36' stroke-width='1.2'/%3E%3C/svg%3E");
+  background: var(--color-cream);
+  font-size: 17px;
+}
+body.bakery[data-page] p { text-wrap: pretty; }
+body.bakery[data-page] .btn {
+  border-radius: 9px;
+  letter-spacing: .025em;
+  text-transform: none;
+  font-size: 15px;
+  min-height: 48px;
+  padding: 12px 23px;
+  transition-duration: 180ms;
+}
+body.bakery[data-page] .text-link { letter-spacing: .035em; font-size: 13px; }
+body.bakery[data-page] .eyebrow { font-size: 11px; letter-spacing: .16em; }
+body.bakery[data-page] [data-reveal], body.bakery[data-page] [data-reveal].in {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+body.bakery[data-page] .nav-wrap { background: var(--bg); backdrop-filter: none; border-color: var(--surface); }
+body.bakery[data-page] .nav-inner { height: 84px; max-width: 1280px; }
+body.bakery[data-page] .nav-brand { align-items: center; gap: 12px; }
+body.bakery[data-page] .nav-brand-type { display: grid; gap: 6px; }
+body.bakery[data-page] .nav-wordmark { font-size: 31px; color: var(--accent); }
+body.bakery[data-page] .nav-descriptor { font-size: 8px; letter-spacing: .16em; }
+body.bakery[data-page] .nav-link { text-transform: none; font-size: 14px; letter-spacing: 0; }
+body.bakery[data-page] .nav-links { gap: 26px; }
+body.bakery[data-page] .brand-cake { width: 36px; height: 36px; color: var(--accent); }
+body.bakery[data-page] .nav-menu[hidden], body.bakery[data-page] .nav-backdrop[hidden] { display: none; }
+body.bakery[data-page] .nav-menu { max-height: calc(100dvh - 84px); overflow-y: auto; }
+body.bakery[data-page] .hero { position: relative; overflow: clip; }
+body.bakery[data-page] .hero::after { content: ''; display: block; height: 12px; background: var(--stitch) repeat-x; }
+body.bakery[data-page] .hero-scene {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  align-items: center;
+  gap: 32px;
+  max-width: 1240px;
+  min-height: 610px;
+  padding: 40px 40px 60px;
+  margin: 0 auto;
+  overflow: visible;
+}
+body.bakery[data-page] .hero-copy { padding: 0; z-index: 1; }
+body.bakery[data-page] .hero-copy .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+body.bakery[data-page] .hero-copy .eyebrow::before { content: ''; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+body.bakery[data-page] .hero-h1 { font-size: clamp(48px, 5.5vw, 76px); max-width: 10ch; font-weight: 500; line-height: 1.04; margin-top: 14px; }
+body.bakery[data-page] .hero-h1 em { color: var(--accent); font-weight: 430; }
+body.bakery[data-page] .hero-lede { max-width: 37ch; font-size: 17px; line-height: 1.7; color: var(--color-muted-ink); margin-top: 24px; }
+body.bakery[data-page] .hero-ctas { gap: 12px; margin-top: 27px; }
+body.bakery[data-page] .hero-facts { display: flex; flex-wrap: wrap; gap: 12px 22px; margin-top: 27px; padding-top: 20px; border-top: 1px solid var(--color-muted); font-size: 12px; color: var(--color-muted-ink); }
+body.bakery[data-page] .hero-facts span::before { content: '·'; color: var(--accent); padding-right: 7px; }
+body.bakery[data-page] .hero-shelf { width: 100%; height: 505px; min-height: 0; flex: none; pointer-events: auto; }
+body.bakery[data-page] .hero-shelf::before {
+  content: ''; position: absolute; inset: 15% -14% 2% 12%;
+  background: var(--gingham) repeat var(--surface); border-radius: 50% 40% 44% 38%; transform: rotate(7deg);
+}
+body.bakery[data-page] .hero-obj--main { width: 75%; height: 445px; right: 5%; top: 8px; bottom: auto; padding: 9px; border: 1px solid var(--color-muted); border-radius: 48% 48% 8px 8px; background: var(--paper); transform: rotate(3deg); }
+body.bakery[data-page] .hero-obj--main img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 58%; border-radius: 48% 48% 4px 4px; box-shadow: none; }
+body.bakery[data-page] .hero-obj--figura { width: 37%; height: 210px; left: -3%; right: auto; bottom: 2%; z-index: 4; padding: 7px 7px 29px; background: var(--paper); transform: rotate(-8deg); box-shadow: var(--shadow-contact); }
+body.bakery[data-page] .hero-obj--figura img { height: 100%; width: 100%; object-fit: cover; object-position: 50% 48%; border-radius: 0; box-shadow: none; }
+body.bakery[data-page] .hero-obj--figura::before { content: 'mira las capas'; position: absolute; bottom: 4px; left: 0; right: 0; text-align: center; font: 21px var(--font-hand); color: var(--accent); }
+body.bakery[data-page] .hero-obj--queso { width: 112px; height: 112px; top: 0; right: -2%; bottom: auto; border: 6px solid var(--paper); border-radius: 50%; overflow: hidden; box-shadow: var(--shadow-card); }
+body.bakery[data-page] .hero-obj--queso img { width: 100%; height: 100%; object-fit: cover; }
+body.bakery[data-page] .hero-obj::after { display: none; }
+body.bakery[data-page] .hero-note { top: auto; bottom: -41px; left: 46%; font-size: 23px; color: var(--accent); }
+body.bakery[data-page] .hero-note--queso { display: none; }
+body.bakery[data-page] .hero-floor { display: none; }
+body.bakery[data-page] .hero-counter { display: none; }
+body.bakery[data-page] .bakery-ribbon { display: flex; justify-content: center; flex-wrap: wrap; gap: 16px 45px; padding: 18px 24px; background: var(--surface); font: italic 20px var(--font-display); color: var(--accent); }
+body.bakery[data-page] .bakery-ribbon span + span::before { content: '◇'; margin-right: 45px; font-size: 16px; }
+body.bakery[data-page] .s02 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; align-items: center; max-width: 1152px; padding: 75px 20px; margin: auto; border: 0; }
+body.bakery[data-page] .s02 > div:first-child { padding: 0; }
+body.bakery[data-page] .s02 .text-h2 { font-size: clamp(32px, 3.4vw, 46px); margin-top: 12px; }
+body.bakery[data-page] .s02-text { max-width: 43ch; }
+body.bakery[data-page] .s02-body { color: var(--color-muted-ink); font-size: 16px; }
+body.bakery[data-page] .s02-aside { display: none; }
+body.bakery[data-page] .s02 .strata-band { width: 100%; border: 8px solid var(--paper); border-radius: 8px; box-shadow: var(--shadow-contact); transform: rotate(-2deg); }
+body.bakery[data-page] .strata-band-img { height: 280px; width: 100%; object-position: 50% 51%; border-radius: 3px; }
+body.bakery[data-page] .strata-mark { top: auto; bottom: 15px; background: var(--paper); padding: 7px 13px; border-radius: 4px; font-size: 22px; }
+body.bakery[data-page] .strata-mark::after { display: none; }
+body.bakery[data-page] .strata-mark--obleas { left: 16px; }
+body.bakery[data-page] .strata-mark--nocilla { right: 16px; }
+body.bakery[data-page] .band-note { grid-column: 2; padding: 18px 0 0; font-size: 19px; }
+body.bakery[data-page] .surface-band { background: var(--surface); }
+body.bakery[data-page] [data-page] { min-width: 0; }
+body.bakery[data-page='inicio'] .surface-band > div { padding-block: 65px; }
+body.bakery[data-page] .vitrina { gap: 24px; margin-top: 32px; }
+body.bakery[data-page] .vitrina::before { display: none; }
+body.bakery[data-page] .vitrina-item { background: var(--paper); border: 1px solid var(--color-muted); border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-card); }
+body.bakery[data-page] .vitrina-obj { display: block; width: 100%; height: 255px; padding: 0; border: 0; overflow: hidden; }
+body.bakery[data-page] .vitrina-obj::after { display: none; }
+body.bakery[data-page] .vitrina-obj img { width: 100%; height: 100%; max-height: none; object-fit: cover; object-position: 50% 42%; border-radius: 0; box-shadow: none; }
+body.bakery[data-page] .vitrina-tag { text-align: left; align-items: start; padding: 23px 24px 25px; flex: 1; }
+body.bakery[data-page] .vitrina-tag::before { display: none; }
+body.bakery[data-page] .vitrina-tag > :first-child { min-height: 0; justify-content: start; align-items: start; }
+body.bakery[data-page] .flavor-name, body.bakery[data-page] .tile-q { font: 500 25px/1.18 var(--font-display); letter-spacing: 0; text-transform: none; }
+body.bakery[data-page] .flavor-text { font-size: 15px; line-height: 1.55; margin-top: 13px; }
+body.bakery[data-page] .cake-card-link { margin-top: auto; padding-top: 18px; color: var(--accent); font-size: 14px; }
+body.bakery[data-page] .vitrina-obj--slot { position: relative; }
+body.bakery[data-page] .slot-cake { position: absolute; right: 14px; bottom: 14px; width: 42px; height: 34px; background: var(--paper); border-radius: 6px; padding: 4px; opacity: 1; }
+body.bakery[data-page] .dark-scene { min-height: 0; max-width: 1152px; margin: 65px auto; border-radius: 22px; }
+body.bakery[data-page] .dark-scene::before, body.bakery[data-page] .dark-scene::after { display: none; }
+body.bakery[data-page] .obrador-tex { height: 100%; mask-image: none; }
+body.bakery[data-page] .obrador-tex img { opacity: .05; }
+body.bakery[data-page] .obrador-grid { padding: 48px 65px; grid-template-columns: 1fr .7fr; gap: 70px; }
+body.bakery[data-page] .obrador-text .text-h2 { font-size: clamp(32px, 3.4vw, 47px); }
+body.bakery[data-page] .obrador-body { font-size: 16px; }
+body.bakery[data-page] .reel-wrap { max-width: 280px; margin: 0 auto; }
+body.bakery[data-page] .reel-frame { box-shadow: none; transform: rotate(3deg); background: var(--paper); padding: 7px; border-radius: 10px; }
+body.bakery[data-page] .reel-wrap video { max-height: 370px; border-radius: 5px; aspect-ratio: 3 / 4; }
+body.bakery[data-page] .reel-play { display: none; }
+body.bakery[data-page] .queso-grid { padding-block: 20px 70px; grid-template-columns: 1fr 1fr; gap: 65px; }
+body.bakery[data-page] .queso-fig { width: 100%; max-width: 460px; }
+body.bakery[data-page] .queso-fig img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 50% 50% 10px 10px; object-position: center; border: 8px solid var(--paper); box-shadow: var(--shadow-contact); }
+body.bakery[data-page] .queso-note { margin-top: 22px; }
+body.bakery[data-page='inicio'] [data-section='S06'] { background: var(--gingham) repeat var(--surface); }
+body.bakery[data-page='inicio'] [data-section='S06'] > div { padding-block: 55px; }
+body.bakery[data-page] .porcion-h { max-width: none; }
+body.bakery[data-page] .porcion-rulerwrap { padding: 28px; background: var(--paper); border-radius: 16px; margin-top: 28px; }
+body.bakery[data-page] .porcion-ruler { padding: 0 200px 0 0; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+body.bakery[data-page] .porcion-ruler::before, body.bakery[data-page] .porcion-ruler::after, body.bakery[data-page] .porcion-ruler li::before { display: none; }
+body.bakery[data-page] .step-n { position: static; width: auto; text-align: left; background: none; display: block; font: italic 30px var(--font-display); margin-bottom: 10px; }
+body.bakery[data-page] .step-txt { font-size: 15px; line-height: 1.5; display: block; }
+body.bakery[data-page] .porcion-fig { right: 28px; top: 50%; width: 140px; padding: 5px; transform: translateY(-50%) rotate(5deg); }
+body.bakery[data-page] .porcion-fig img { height: 140px; object-fit: cover; }
+body.bakery[data-page] .colo-wordmark { font-size: 56px; }
+body.bakery[data-page] .colophon { border-top: 8px solid var(--accent); }
+body.bakery[data-page] .colo-nav a { text-transform: none; letter-spacing: 0; font-size: 14px; }
+body.bakery[data-page] .colo-rule { margin-top: 22px; }
+body.bakery[data-page='tartas'] .carta { background: var(--gingham) repeat var(--surface); }
+body.bakery[data-page='tartas'] .carta-wrap { padding-block: 48px 24px; }
+body.bakery[data-page='tartas'] .carta-h1 { font-size: 64px; }
+body.bakery[data-page='tartas'] .carta-marks { display: none; }
+body.bakery[data-page='tartas'] .carta-lede { max-width: 65ch; font-size: 16px; }
+body.bakery[data-page='tartas'] .rail { margin-top: 25px; border-radius: 12px; border: 1px solid var(--color-muted); background: var(--paper); }
+body.bakery[data-page='tartas'] .tarta { padding-block: 50px; }
+body.bakery[data-page='tartas'] .ph { padding: 6px; background: var(--paper); border-radius: 10px; box-shadow: var(--shadow-contact); }
+body.bakery[data-page='tartas'] .ph img { object-fit: cover; max-height: 390px; border-radius: 6px; }
+body.bakery[data-page='tartas'] .pair, body.bakery[data-page='tartas'] .duo { width: 100%; max-width: 510px; }
+body.bakery[data-page='tartas'] .pair-a, body.bakery[data-page='tartas'] .pair-b { width: 100%; }
+body.bakery[data-page='tartas'] .pair-b { transform: rotate(5deg); }
+body.bakery[data-page='tartas'] .pair-grid, body.bakery[data-page='tartas'] .duo-grid, body.bakery[data-page='tartas'] .corte-grid { gap: 36px; }
+body.bakery[data-page='tartas'] .corte-stage { max-width: 580px; }
+body.bakery[data-page='tartas'] .corte-fig img { height: 360px; width: 100%; object-fit: cover; object-position: 50% 45%; border-radius: 45% 45% 8px 8px; }
+body.bakery[data-page='tartas'] .capas-rule { display: none; }
+body.bakery[data-page='tartas'] .tarta:nth-of-type(3) { background: var(--surface); }
+body.bakery[data-page='tartas'] .qs-shelf { max-width: 620px; margin-inline: auto; }
+body.bakery[data-page='tartas'] .qs-frame img { max-height: 280px; }
+body.bakery[data-page='tartas'] .latuya { background: var(--gingham) repeat var(--surface); }
+body.bakery[data-page='tartas'] .latuya-grid { padding-block: 45px; }
+body.bakery[data-page='sobre'] .ap { grid-template-columns: 1.2fr 1fr; grid-template-areas: 'eb fig' 'h1 fig' 'pp fig'; align-items: start; }
+body.bakery[data-page='sobre'] .ap-fig { width: 100%; max-width: 350px; justify-self: end; margin-top: 0; }
+body.bakery[data-page='sobre'] .ap-fig img { width: 100%; max-height: 320px; object-fit: cover; }
+body.bakery[data-page='sobre'] .ap-h1 { margin-bottom: 22px; }
+body.bakery[data-page='sobre'] .ap-paras { max-width: 52ch; }
+body.bakery[data-page='sobre'] .film { gap: 24px; }
+body.bakery[data-page='sobre'] .film-cell { background: var(--surface); border-radius: 12px; padding: 8px; }
+body.bakery[data-page='sobre'] .film-media img { height: 245px; object-fit: cover; }
+body.bakery[data-page='sobre'] .carta-fig img { max-height: 360px; object-fit: cover; }
+body.bakery[data-page='sobre'] .trabajo { background: var(--gingham) repeat var(--surface); border-radius: 18px; }
+body.bakery[data-page='como-encargar'] .entrada { align-items: center; }
+body.bakery[data-page='como-encargar'] .entrada-fig { width: 250px; }
+body.bakery[data-page='como-encargar'] .entrada-fig img { height: 230px; object-fit: cover; }
+body.bakery[data-page='como-encargar'] .paso-media { max-height: 240px; border-radius: 15px; }
+body.bakery[data-page='como-encargar'] .redactor-scene { border-radius: 22px; max-width: 1152px; margin: 0 auto; }
+body.bakery[data-page='como-encargar'] .redactor-inner { padding: 48px 40px; }
+body.bakery[data-page='contacto'] .carta-grid { padding-block: 48px; }
+body.bakery[data-page='contacto'] .carta-slip { display: none; }
+body.bakery[data-page='contacto'] .rail-card { border-radius: 12px; background: var(--surface); }
+body.bakery[data-page='contacto'] .rail-card:has(.rail-tag) { display: none; }
+body.bakery[data-page='contacto'] .rail-photo { min-height: 230px; }
+body.bakery[data-page] .dm-composer { background: var(--paper); border-radius: 18px; }
+body.bakery[data-page] .dm-title { font: 500 29px var(--font-display); text-transform: none; letter-spacing: 0; }
+body.bakery[data-page] .dm-input { border-color: var(--color-muted); border-radius: 8px; min-height: 48px; }
+body.bakery[data-page] .dm-preview { transform: none; }
+body.bakery[data-page='faq'] main > section:first-child { background: var(--gingham) repeat var(--surface); max-width: none; }
+body.bakery[data-page='faq'] main > section:first-child > div { max-width: 1112px; margin-inline: auto; }
+body.bakery[data-page='faq'] .faq-intro { padding-block: 42px; }
+body.bakery[data-page='faq'] .intro-photo img { width: 100%; height: 335px; object-fit: cover; object-position: 50% 65%; }
+body.bakery[data-page='faq'] .aside-photo img { width: 100%; height: 210px; object-fit: cover; object-position: 50% 75%; }
+body.bakery[data-page='contacto'] .carta { padding-block: 0; }
+body.bakery[data-page='contacto'] .salidas { padding-block: 28px 45px; }
+body.bakery[data-page] .frame-card { background: var(--paper); }
+@media (max-width: 1023px) {
+  body.bakery[data-page] .hero-scene { grid-template-columns: 1fr 1fr; padding-inline: 25px; min-height: 550px; gap: 15px; }
+  body.bakery[data-page] .hero-h1 { font-size: 57px; }
+  body.bakery[data-page] .hero-shelf { height: 425px; }
+  body.bakery[data-page] .hero-obj--main { left: auto; width: 82%; height: 355px; }
+  body.bakery[data-page] .hero-obj--figura { display: block; height: 170px; width: 41%; }
+  body.bakery[data-page] .hero-obj--queso { width: 85px; height: 85px; }
+  body.bakery[data-page] .s02 { gap: 32px; padding-block: 50px; }
+  body.bakery[data-page] .dark-scene { margin-inline: 20px; }
+  body.bakery[data-page] .obrador-grid { padding: 35px; gap: 35px; }
+  body.bakery[data-page] .porcion-ruler { padding-right: 0; }
+  body.bakery[data-page] .porcion-fig { display: none; }
+}
+@media (max-width: 640px) {
+  body.bakery[data-page] .nav-inner { height: 72px; gap: 12px; }
+  body.bakery[data-page] .nav-wordmark { font-size: 27px; }
+  body.bakery[data-page] .nav-descriptor { display: block; font-size: 7px; }
+  body.bakery[data-page] .brand-cake { width: 27px; height: 27px; }
+  body.bakery[data-page] .nav-brand { gap: 8px; }
+  body.bakery[data-page] .nav-cta { font-size: 12px; padding: 10px 12px; min-height: 44px; }
+  body.bakery[data-page] .hero-scene { grid-template-columns: 1fr; padding: 30px 22px 42px; gap: 30px; min-height: 0; }
+  body.bakery[data-page] .hero-h1 { font-size: clamp(46px, 12vw, 63px); max-width: 12ch; margin-top: 7px; }
+  body.bakery[data-page] .hero-lede { font-size: 16px; margin-top: 20px; }
+  body.bakery[data-page] .hero-ctas { margin-top: 22px; }
+  body.bakery[data-page] .hero-ctas .btn { padding-inline: 16px; }
+  body.bakery[data-page] .hero-facts { margin-top: 20px; padding-top: 15px; gap: 8px 15px; }
+  body.bakery[data-page] .hero-shelf { max-width: 410px; height: 370px; margin: 0 auto; }
+  body.bakery[data-page] .hero-obj--main { right: 9%; top: 0; height: 325px; width: 70%; }
+  body.bakery[data-page] .hero-obj--figura { left: 0; bottom: 0; width: 36%; height: 155px; }
+  body.bakery[data-page] .hero-obj--queso { right: 0; top: 4px; }
+  body.bakery[data-page] .hero-note { bottom: -37px; left: 36%; font-size: 23px; }
+  body.bakery[data-page] .bakery-ribbon { gap: 7px 18px; font-size: 15px; padding: 14px 18px; }
+  body.bakery[data-page] .bakery-ribbon span + span::before { margin-right: 18px; font-size: 12px; }
+  body.bakery[data-page] .s02 { grid-template-columns: 1fr; gap: 26px; padding: 40px 22px; }
+  body.bakery[data-page] .band-note { grid-column: 1; padding: 0; font-size: 19px; }
+  body.bakery[data-page] .strata-band-img { height: 230px; }
+  body.bakery[data-page='inicio'] .surface-band > div { padding-block: 38px; }
+  body.bakery[data-page] .vitrina { grid-template-columns: 1fr; gap: 20px; }
+  body.bakery[data-page] .vitrina-obj { height: 265px; }
+  body.bakery[data-page] .vitrina-tag { padding: 22px; }
+  body.bakery[data-page] .flavor-name, body.bakery[data-page] .tile-q { font-size: 26px; }
+  body.bakery[data-page] .dark-scene { margin: 35px 16px; }
+  body.bakery[data-page] .obrador-grid { grid-template-columns: 1fr; padding: 32px 25px; gap: 25px; }
+  body.bakery[data-page] .reel-wrap { max-width: 230px; }
+  body.bakery[data-page] .obrador-quote { margin-top: 20px; }
+  body.bakery[data-page] .queso-grid { grid-template-columns: 1fr; gap: 25px; padding: 15px 22px 40px; }
+  body.bakery[data-page] .queso-fig { max-width: 310px; }
+  body.bakery[data-page] .queso-fig img { height: 280px; }
+  body.bakery[data-page='inicio'] [data-section='S06'] > div { padding-block: 35px; }
+  body.bakery[data-page] .porcion-ruler { grid-template-columns: 1fr; gap: 20px; padding: 0; }
+  body.bakery[data-page] .porcion-rulerwrap { padding: 23px; }
+  body.bakery[data-page] .porcion-ruler li { display: grid; grid-template-columns: 40px 1fr; gap: 15px; }
+  body.bakery[data-page] .porcion-ctas { gap: 10px; }
+  body.bakery[data-page='tartas'] .carta-h1 { font-size: 48px; }
+  body.bakery[data-page='tartas'] .tarta { padding-block: 35px; }
+  body.bakery[data-page='tartas'] .corte-fig img { height: 300px; }
+  body.bakery[data-page='sobre'] .ap { grid-template-columns: 1fr; grid-template-areas: 'eb' 'h1' 'fig' 'pp'; }
+  body.bakery[data-page='sobre'] .ap-fig { justify-self: center; max-width: 270px; margin-block: 5px 28px; }
+  body.bakery[data-page='sobre'] .film-media img { height: 235px; }
+  body.bakery[data-page='como-encargar'] .entrada-fig { margin-top: 15px; }
+  body.bakery[data-page='como-encargar'] .redactor-scene { margin-inline: 12px; }
+  body.bakery[data-page='como-encargar'] .redactor-inner { padding: 30px 20px; }
+  body.bakery[data-page='contacto'] .carta-grid { padding-block: 32px; }
+  body.bakery[data-page] .colo-grid { gap: 25px; }
+  body.bakery[data-page] .colo-nav { gap: 8px 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.bakery[data-page] *, body.bakery[data-page] *::before, body.bakery[data-page] *::after { scroll-behavior: auto; transition: none; }
+}

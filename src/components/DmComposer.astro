@@ -1,0 +1,287 @@
+---
+// TEAM_030: V3 SSOT — все видимые тексты/поля/статусы/шаблон и список
+// tartas читаются из sections.json → como-encargar.s02.composer (та же
+// карточка живёт на /contacto/ S01: «один компонент, другой фрейминг»).
+// Props только фрейминговые: heading/lede меняет contacto, механика общая.
+// TEAM_007/009 механика (сохранена): vanilla JS, zero deps; «Copiar y abrir
+// Instagram» открывает окно синхронно до await clipboard; fallback —
+// execCommand → выделение превью; «?tarta=<slug>» предвыбор из deep-link
+// карточек /tartas/ (читается client-side — билд статический).
+// No-JS: статичный текст-пример из noscript + прямой линк на профиль.
+import site from '../data/sections.json';
+
+interface Props {
+	heading?: string;
+	lede?: string;
+	igUrl?: string;
+	class?: string;
+}
+
+const composer = site['como-encargar'].s02.composer;
+
+const {
+	heading = composer.title,
+	lede = '',
+	igUrl = site.global.brand.instagram,
+	class: cls = '',
+} = Astro.props;
+
+// Пример для noscript/initial preview: канонный шаблон с fill первой опции.
+const example = composer.template
+	.replace('<tarta>', composer.options[0].fill)
+	.replace('<dd/mm/yyyy>', '__')
+	.replace('<nombre>', '__');
+---
+
+<section
+	class:list={['dm-composer', cls]}
+	data-dm-composer
+	data-ig={igUrl}
+	data-template={composer.template}
+	data-status={JSON.stringify(composer.status)}
+>
+	<h2 class="dm-title">{heading}</h2>
+	{lede && <p class="dm-lede">{lede}</p>}
+
+	<form class="dm-form" onsubmit="return false">
+		<label class="dm-field">
+			<span class="dm-label">{composer.fields.tarta}</span>
+			<select class="dm-input" data-dm-cake>
+				{composer.options.map((o) => (
+					<option value={o.slug} data-fill={o.fill}>{o.label}</option>
+				))}
+			</select>
+		</label>
+		<label class="dm-field">
+			<span class="dm-label">{composer.fields.dia}</span>
+			<input class="dm-input" type="date" data-dm-date />
+		</label>
+		<label class="dm-field">
+			<span class="dm-label">{composer.fields.nombre}</span>
+			<input class="dm-input" type="text" data-dm-name placeholder="Marta" autocomplete="given-name" />
+		</label>
+	</form>
+
+	<div class="dm-preview-wrap">
+		<span class="dm-label">{composer.fields.mensaje}</span>
+		<p class="dm-preview hand-note" data-dm-preview aria-live="polite">{example}</p>
+	</div>
+
+	<div class="dm-actions">
+		<button type="button" class="btn" data-dm-go>
+			<span data-dm-go-label>{composer.buttons.primary}</span>
+		</button>
+		<button type="button" class="btn btn--ghost" data-dm-copy>
+			<span data-dm-copy-label>{composer.buttons.ghost}</span>
+		</button>
+		<a class="dm-fallback" href={igUrl} target="_blank" rel="noopener">{composer.buttons.quiet}</a>
+	</div>
+
+	<noscript>
+		<p class="dm-noscript">
+			{composer.noscript}
+			<a href={igUrl} target="_blank" rel="noopener">{site.global.brand.handle} ↗</a>
+		</p>
+	</noscript>
+</section>
+
+<style>
+	.dm-composer {
+		background: var(--surface);
+		border: 1px solid color-mix(in srgb, var(--color-muted) 50%, transparent);
+		/* TEAM_039: «карточка-письмо» — кромки + контактная тень, карточка
+		   поднята над столом, не плашка заподлицо. */
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-contact);
+		/* TEAM_012: mobile overflow fix — the <select> intrinsic width + 2rem
+		   padding forced ~412px on a 375px viewport. width:100% caps the flex/
+		   grid item, min-width:0 lets the chain shrink below min-content. */
+		padding: clamp(1.25rem, 5vw, 2rem);
+		width: 100%;
+		min-width: 0;
+		/* TEAM_030: max-width снят — канон S01 держит карточку на всю колонку
+		   (7/12), шириной владеет grid страницы, не компонент. */
+	}
+	.dm-title {
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 1.05rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	.dm-lede {
+		margin-top: 0.5rem;
+		font-size: 0.9rem;
+		color: var(--color-muted-ink);
+	}
+	.dm-form {
+		margin-top: 1.4rem;
+		display: grid;
+		gap: 0.9rem;
+	}
+	.dm-field { display: grid; gap: 0.35rem; min-width: 0; }
+	.dm-label {
+		/* TEAM_030: var(--font-caps) не существует в токенах V3 — Jost. */
+		font-family: var(--font-sans);
+		font-weight: 500;
+		font-size: 0.7rem;
+		letter-spacing: 0.24em;
+		text-transform: uppercase;
+		color: var(--color-muted-ink);
+	}
+	.dm-input {
+		font: inherit;
+		padding: 0.6em 0.9em;
+		border: 1px solid var(--color-muted-ink);
+		border-radius: 4px;
+		background: var(--bg);
+		color: var(--color-ink);
+		width: 100%;
+		min-width: 0;
+	}
+	.dm-input:focus-visible { outline-color: var(--color-caramel-ink); }
+	.dm-preview-wrap { margin-top: 1.4rem; display: grid; gap: 0.4rem; }
+	.dm-preview {
+		background: var(--bg);
+		border: 1px dashed var(--color-muted);
+		border-radius: 4px;
+		padding: 0.9rem 1.1rem;
+		font-size: 1.25rem;
+		min-height: 4.2em;
+		white-space: pre-wrap;
+		transform: rotate(-0.8deg);
+	}
+	.dm-actions {
+		margin-top: 1.4rem;
+		display: flex;
+		align-items: center;
+		gap: 1.1rem;
+		flex-wrap: wrap;
+	}
+	.dm-fallback {
+		/* TEAM_045 Q2-01: hit-area 44px; underline → text-decoration. */
+		display: inline-flex;
+		align-items: center;
+		min-height: 2.75rem;
+		font-size: 0.85rem;
+		color: var(--color-caramel-ink);
+		text-decoration: underline;
+		text-underline-offset: 0.15em;
+	}
+	.dm-noscript {
+		margin-top: 1rem;
+		font-size: 0.9rem;
+		color: var(--color-muted-ink);
+	}
+	.dm-noscript a { color: var(--color-caramel-ink); }
+
+	/* Hide the JS action entirely without JS — the noscript block covers it. */
+	:global(html:not(.js)) .dm-actions .btn { display: none; }
+	:global(html:not(.js)) .dm-preview { display: none; }
+</style>
+
+<script>
+	// TEAM_030: compose() = канонный шаблон sections.json с токенами
+	// <tarta>/<dd/mm/yyyy>/<nombre>; незаполненные поля → «__» (как noscript).
+	// Статусы кнопок тоже из sections.json (data-status JSON).
+	document.querySelectorAll('[data-dm-composer]').forEach((root) => {
+		const cake = root.querySelector('[data-dm-cake]') as HTMLSelectElement;
+		const date = root.querySelector('[data-dm-date]') as HTMLInputElement;
+		const name = root.querySelector('[data-dm-name]') as HTMLInputElement;
+		const preview = root.querySelector('[data-dm-preview]') as HTMLElement;
+		const go = root.querySelector('[data-dm-go]') as HTMLButtonElement;
+		const goLabel = root.querySelector('[data-dm-go-label]') as HTMLElement;
+		const copy = root.querySelector('[data-dm-copy]') as HTMLButtonElement;
+		const copyLabel = root.querySelector('[data-dm-copy-label]') as HTMLElement;
+		const ig = root.getAttribute('data-ig') ?? 'https://instagram.com/dulcea.cake';
+		const template = root.getAttribute('data-template') ?? '';
+		const status = JSON.parse(
+			root.getAttribute('data-status') ?? '{}'
+		) as Record<string, string>;
+
+		// TEAM_009: «La quiero →» deep-links — ?tarta=<slug> preselects the cake.
+		const wanted = new URLSearchParams(location.search).get('tarta');
+		if (wanted && [...cake.options].some((o) => o.value === wanted)) {
+			cake.value = wanted;
+			requestAnimationFrame(() =>
+				root.scrollIntoView({ block: 'center' })
+			);
+		}
+
+		const fmtDate = (iso: string) => {
+			if (!iso) return '__';
+			const [y, m, d] = iso.split('-');
+			return `${d}/${m}/${y}`;
+		};
+		const compose = () =>
+			template
+				.replace('<tarta>', cake.selectedOptions[0]?.dataset.fill ?? 'una tarta')
+				.replace('<dd/mm/yyyy>', fmtDate(date.value))
+				.replace('<nombre>', name.value.trim() || '__');
+
+		const render = () => (preview.textContent = compose());
+		[cake, date, name].forEach((el) => el.addEventListener('input', render));
+		render();
+
+		// TEAM_009: clipboard with real fallbacks — navigator.clipboard needs a
+		// secure context + permission; execCommand covers older engines; last
+		// resort is selecting the preview text so the user can ⌘C it.
+		const copyText = async (text: string) => {
+			try {
+				await navigator.clipboard.writeText(text);
+				return true;
+			} catch { /* fall through to execCommand */ }
+			try {
+				const ta = document.createElement('textarea');
+				ta.value = text;
+				ta.setAttribute('readonly', '');
+				ta.style.position = 'fixed';
+				ta.style.opacity = '0';
+				document.body.appendChild(ta);
+				ta.select();
+				const ok = document.execCommand('copy');
+				ta.remove();
+				return ok;
+			} catch {
+				return false;
+			}
+		};
+		const selectPreview = () => {
+			const sel = getSelection();
+			const range = document.createRange();
+			range.selectNodeContents(preview);
+			sel?.removeAllRanges();
+			sel?.addRange(range);
+		};
+		const flash = (el: HTMLElement, msg: string) => {
+			const prev = el.textContent;
+			el.textContent = msg;
+			setTimeout(() => (el.textContent = prev), 2500);
+		};
+
+		copy.addEventListener('click', async () => {
+			const ok = await copyText(compose());
+			if (ok) {
+				flash(copyLabel, status.copied ?? 'Copiado ✓');
+			} else {
+				selectPreview();
+				flash(copyLabel, status.select_above ?? 'Cópialo de arriba ↑');
+			}
+		});
+
+		go.addEventListener('click', () => {
+			const text = compose();
+			// TEAM_009: open synchronously — after an awaited clipboard the user
+			// gesture may already be spent and popup blockers would kill the tab.
+			window.open(ig, '_blank', 'noopener');
+			copyText(text).then((ok) => {
+				if (ok) {
+					flash(goLabel, status.copied_open ?? 'Mensaje copiado ✓');
+				} else {
+					selectPreview();
+					flash(goLabel, status.select_above ?? 'Cópialo de arriba ↑');
+				}
+			});
+		});
+	});
+</script>

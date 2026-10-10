@@ -1,0 +1,113 @@
+{
+  "slots": {
+    "hero-card": "obleas-nocilla-porcion",
+    "corte-band": "obleas-corte",
+    "card-1-nocilla-barritas": "obleas-barritas",
+    "card-2-filipinos": "filipinos-entera",
+    "queso-diptych": "queso-porcion",
+    "tu-porcion": "filipinos-porcion",
+    "reel-poster": "reel-frame-1",
+    "nocilla-pair-main": "obleas-nocilla-porcion",
+    "nocilla-pair-second": "obleas-nocilla-top",
+    "filipinos-pair-entera": "filipinos-entera",
+    "filipinos-pair-porcion": "filipinos-porcion",
+    "barritas-figura": "obleas-corte",
+    "barritas-satelite": "obleas-barritas",
+    "queso-shelf-entera": "queso-entera",
+    "queso-shelf-porcion": "queso-porcion",
+    "pastelera-foto-margen": "reel-frame-1",
+    "fotograma-1": "reel-frame-1",
+    "fotograma-2": "reel-frame-4",
+    "fotograma-3": "reel-frame-6",
+    "mini-carta-foto": "filipinos-porcion",
+    "entrada-anchor": "queso-entera",
+    "paso-2": "reel-frame-2",
+    "paso-3": "obleas-nocilla-porcion",
+    "redactor-texture": "obleas-corte",
+    "rail-anchor": "queso-entera",
+    "intro-sticker": "filipinos-entera",
+    "acordeon-aside": "queso-entera",
+    "queso-entera-warm": "queso-entera",
+    "filipinos-alt": "filipinos-porcion",
+    "capas-macro": "obleas-corte"
+  },
+  "photos": {
+    "obleas-nocilla-porcion": {
+      "width": 896,
+      "height": 1191,
+      "source": "photobank/obleas-nocilla-porcion.jpg",
+      "crop": null
+    },
+    "obleas-corte": {
+      "width": 1086,
+      "height": 1448,
+      "source": "photobank/obleas-corte.jpg",
+      "crop": null
+    },
+    "obleas-barritas": {
+      "width": 1086,
+      "height": 1448,
+      "source": "photobank/obleas-barritas.jpg",
+      "crop": null
+    },
+    "filipinos-entera": {
+      "width": 1086,
+      "height": 1448,
+      "source": "photobank/filipinos-entera.jpg",
+      "crop": null
+    },
+    "queso-porcion": {
+      "width": 704,
+      "height": 938,
+      "source": "photobank/queso-porcion.jpg",
+      "crop": null
+    },
+    "filipinos-porcion": {
+      "width": 1086,
+      "height": 1448,
+      "source": "photobank/filipinos-porcion.jpg",
+      "crop": null
+    },
+    "reel-frame-1": {
+      "width": 720,
+      "height": 960,
+      "source": "photobank/reel-frame-1.jpg",
+      "crop": null
+    },
+    "obleas-nocilla-top": {
+      "width": 896,
+      "height": 1191,
+      "source": "photobank/obleas-nocilla-top.jpg",
+      "crop": null
+    },
+    "queso-entera": {
+      "width": 704,
+      "height": 600,
+      "source": "photobank/queso-entera.jpg",
+      "crop": {
+        "left": 0,
+        "top": 180,
+        "width": 704,
+        "height": 600
+      }
+    },
+    "reel-frame-4": {
+      "width": 720,
+      "height": 960,
+      "source": "photobank/reel-frame-4.jpg",
+      "crop": null
+    },
+    "reel-frame-6": {
+      "width": 720,
+      "height": 960,
+      "source": "photobank/reel-frame-6.jpg",
+      "crop": null
+    },
+    "reel-frame-2": {
+      "width": 720,
+      "height": 960,
+      "source": "photobank/reel-frame-2.jpg",
+      "crop": null
+    }
+  }
+}
