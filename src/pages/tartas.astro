@@ -734,38 +734,23 @@ const p = site.tartas;
 		.cierre { padding-bottom: 3.25rem; }
 	}
 
-	/* TEAM_045: мобильная пересборка страницы — десктопные коллажи с
-	   перекрытиями на <1024 дают мелкие картинки в пустых картах.
-	   Заменены на горизонтальные snap-ленты «полароидов» с краем
-	   следующего кадра как аффордансом свайпа; подпись-заметка —
-	   последний элемент ленты. */
+	/* TEAM_046: мобильная пересборка v2 — свайп-ленты убраны (кадр
+	   обрезан + надо догадываться, что листать). Теперь вертикальная
+	   стопка: главный кадр во всю ширину, второй ~70% со сдвигом —
+	   всё видно сразу, подпись-заметка под кадрами. */
 	@media (max-width: 1023.98px) {
 		.pair--stagger,
 		.duo {
-			display: flex;
-			overflow-x: auto;
-			scroll-snap-type: x mandatory;
-			gap: 0.7rem;
-			max-width: none;
-			margin-inline: -1.25rem;
-			padding: 0.25rem 1.25rem 1.3rem;
-			scrollbar-width: none;
-			overscroll-behavior-x: contain;
+			display: grid;
+			gap: 0.9rem;
+			max-width: 34rem;
 		}
-		.pair--stagger::-webkit-scrollbar,
-		.duo::-webkit-scrollbar { display: none; }
-		.pair-a, .pair-b, .duo-a, .duo-b {
-			flex: 0 0 74%;
-			margin: 0;
-			scroll-snap-align: start;
-		}
-		.duo-a { flex-basis: 58%; }
+		.pair-a, .duo-b { width: 100%; margin: 0; }
+		.pair-b { width: 68%; justify-self: end; margin: 0; }
+		.duo-a { width: 62%; justify-self: start; margin: 0; }
 		.pair-cap, .duo-cap {
-			flex: 0 0 55%;
-			align-self: end;
-			justify-self: auto;
-			margin: 0 0 0.4rem 0.2rem;
-			scroll-snap-align: end;
+			justify-self: end;
+			margin: 0.35rem 0.2rem 0 0;
 		}
 		/* corte: фигура на всю ширину, аннотация остаётся поверх
 		   (правый нижний угол), спутник — под кадром слева. */
@@ -782,6 +767,9 @@ const p = site.tartas;
 			margin-inline: -1.25rem;
 			padding-inline: 1.25rem;
 			scrollbar-width: none;
+			/* затухание правого края = «дальше ещё есть» без подсказок */
+			-webkit-mask-image: linear-gradient(90deg, #000 82%, transparent 99%);
+			mask-image: linear-gradient(90deg, #000 82%, transparent 99%);
 		}
 		.rail::-webkit-scrollbar { display: none; }
 		.rail-cell {

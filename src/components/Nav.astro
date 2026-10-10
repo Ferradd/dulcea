@@ -60,11 +60,15 @@ const isCurrent = (href: string) =>
 		<a href={header.cta.href} class="btn nav-menu-cta">{header.cta.label}</a>
 	</nav>
 </header>
+{/* TEAM_046: fixed-шапка (sticky рвётся на iOS из-за overflow-x:clip
+    на body) — спейсер держит место в потоке. */}
+<div class="nav-spacer" aria-hidden="true"></div>
 
 <style>
 	/* G.8: thin cream bar ~64–72px, hairline under it on scroll. */
 	.nav-wrap {
-		position: sticky;
+		position: fixed;
+		inset-inline: 0;
 		top: 0;
 		z-index: 50;
 		background: color-mix(in srgb, var(--bg) 90%, transparent);
@@ -72,6 +76,7 @@ const isCurrent = (href: string) =>
 		border-bottom: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
 	}
 	.nav-inner { height: 4.25rem; }
+	.nav-spacer { height: 4.25rem; }
 
 	.nav-brand {
 		display: flex;
