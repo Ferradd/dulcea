@@ -733,4 +733,70 @@ const p = site.tartas;
 		.cierre .filete { margin-top: 2.5rem; }
 		.cierre { padding-bottom: 3.25rem; }
 	}
+
+	/* TEAM_045: мобильная пересборка страницы — десктопные коллажи с
+	   перекрытиями на <1024 дают мелкие картинки в пустых картах.
+	   Заменены на горизонтальные snap-ленты «полароидов» с краем
+	   следующего кадра как аффордансом свайпа; подпись-заметка —
+	   последний элемент ленты. */
+	@media (max-width: 1023.98px) {
+		.pair--stagger,
+		.duo {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			gap: 0.7rem;
+			max-width: none;
+			margin-inline: -1.25rem;
+			padding: 0.25rem 1.25rem 1.3rem;
+			scrollbar-width: none;
+			overscroll-behavior-x: contain;
+		}
+		.pair--stagger::-webkit-scrollbar,
+		.duo::-webkit-scrollbar { display: none; }
+		.pair-a, .pair-b, .duo-a, .duo-b {
+			flex: 0 0 74%;
+			margin: 0;
+			scroll-snap-align: start;
+		}
+		.duo-a { flex-basis: 58%; }
+		.pair-cap, .duo-cap {
+			flex: 0 0 55%;
+			align-self: end;
+			justify-self: auto;
+			margin: 0 0 0.4rem 0.2rem;
+			scroll-snap-align: end;
+		}
+		/* corte: фигура на всю ширину, аннотация остаётся поверх
+		   (правый нижний угол), спутник — под кадром слева. */
+		.corte-fig { grid-column: 1 / 13; }
+		.capas-note { grid-column: 5 / 13; }
+	}
+
+	@media (max-width: 639.98px) {
+		/* rail-индекс → прокручиваемые пилюли: 5 якорей остаются
+		   читаемыми, не ломаются в сетку 3+2 */
+		.rail {
+			display: flex;
+			overflow-x: auto;
+			margin-inline: -1.25rem;
+			padding-inline: 1.25rem;
+			scrollbar-width: none;
+		}
+		.rail::-webkit-scrollbar { display: none; }
+		.rail-cell {
+			flex: 0 0 auto;
+			padding: 0.9rem 1.05rem;
+			border-top: 0;
+		}
+		.rail-cell + .rail-cell {
+			border-left: 1px solid color-mix(in srgb, var(--color-muted) 45%, transparent);
+		}
+		/* queso-полка: на мобайле кадры были ~95–140px — «сломано».
+		   Увеличены до читаемых ~205/128px, та же базовая линия. */
+		.qs-shelf {
+			--qs-w: 40vw;
+			gap: 0 0.65rem;
+		}
+	}
 </style>
