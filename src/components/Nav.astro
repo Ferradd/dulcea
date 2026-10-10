@@ -18,7 +18,9 @@ const isCurrent = (href: string) =>
 <header class="nav-wrap">
 	<div class="nav-inner mx-auto flex max-w-6xl items-center justify-between gap-6 px-5">
 		<a href="/" class="nav-brand" aria-label="dulcea — inicio">
-			<svg class="brand-cake" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 24Q24 16 40 24V36Q24 43 8 36ZM8 29Q24 36 40 29M8 34Q24 41 40 34M4 40H44M24 9V20M21 7Q18 2 24 1Q30 3 27 7Q24 10 21 7Z"/><path d="M8 24Q9 31 13 26Q16 32 20 27Q24 33 28 27Q32 32 35 26Q39 31 40 24"/></svg>
+			{/* TEAM_046: настоящий логотип Néa CAKES из photobank
+			    (logo-avatar-150.jpg) вместо рисованного SVG-значка */}
+			<img src="/logo.jpg" class="brand-logo" alt="Néa Cakes — tartas artesanales" width="44" height="44" />
 			<span class="nav-brand-type"><span class="wordmark nav-wordmark">{brand.wordmark}</span>
 			<span class="nav-descriptor">{brand.descriptor}</span></span>
 		</a>
@@ -84,6 +86,13 @@ const isCurrent = (href: string) =>
 		gap: 0.65rem;
 		text-decoration: none;
 		color: var(--color-ink);
+	}
+	.brand-logo {
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 50%;
+		display: block;
+		align-self: center;
 	}
 	.nav-wordmark { font-size: 1.55rem; }
 	.nav-descriptor {

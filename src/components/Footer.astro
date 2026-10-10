@@ -15,9 +15,13 @@ const { brand, header, footer } = site.global;
 <footer class:list={['colophon', cls]}>
 	<div class="mx-auto max-w-6xl px-5 py-14 md:py-16">
 		<div class="colo-grid">
-			<div>
-				<p class="wordmark colo-wordmark">{brand.wordmark}</p>
-				<p class="colo-line">{footer.line}</p>
+			<div class="colo-brand">
+				{/* TEAM_046: настоящий логотип Néa CAKES в футере */}
+				<img src="/logo.jpg" class="colo-logo" alt="Néa Cakes" width="72" height="72" />
+				<div>
+					<p class="wordmark colo-wordmark">{brand.wordmark}</p>
+					<p class="colo-line">{footer.line}</p>
+				</div>
 			</div>
 			<div class="colo-right">
 				<nav class="colo-nav" aria-label="Pie">
@@ -44,6 +48,18 @@ const { brand, header, footer } = site.global;
 		justify-content: space-between;
 		gap: 2.5rem;
 		flex-wrap: wrap;
+	}
+	.colo-brand {
+		display: flex;
+		align-items: center;
+		gap: 1.1rem;
+	}
+	.colo-logo {
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 50%;
+		display: block;
+		flex: 0 0 auto;
 	}
 	.colo-wordmark {
 		font-size: 1.9rem;
